@@ -1,1 +1,19 @@
-{"markdown":3,"code":3,"features":3,"next-js":5,"math":1,"ols":1,"github":1,"guide":4,"tailwind":2,"holiday":1,"canada":1,"images":1,"writings":1,"book":1,"reflection":1,"multi-author":1,"feature":1}
+{
+  "desktop": 3,
+  "web-dev": 3,
+  "android-dev": 3,
+  "next-js": 5,
+  "flutter": 1,
+  "javascript": 1,
+  "java": 1,
+  "c++": 4,
+  "tailwind": 2,
+  "html-css": 1,
+  "php": 1,
+  "framework": 1,
+  "frontend": 1,
+  "backend": 1,
+  "fullstack": 1,
+  "cloud": 1,
+  "artificial intelligence": 1
+}
