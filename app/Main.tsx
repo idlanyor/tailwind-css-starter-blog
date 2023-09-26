@@ -22,19 +22,22 @@ export default function Home({ posts }) {
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags,images } = post;
+            const { slug, date, title, summary, tags, images } = post
             return (
               <li key={slug} className="py-12 md:px-4">
                 <article className="rounded-lg shadow-lg p-4 bg-gray-100 dark:bg-gray-800 grid md:grid-cols-1 lg:grid-cols-4 gap-4">
                   <div className="mb-2 lg:col-span-1 lg:self-center">
-                    <Image width={500} height={300} src={images} alt={title} className="w-full h-auto rounded-lg" />
+                    <Image
+                      width={500}
+                      height={300}
+                      src={images}
+                      alt={title}
+                      className="w-full h-auto rounded-lg"
+                    />
                   </div>
                   <div className="lg:col-span-3 space-y-6">
                     <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                      <Link
-                        href={`/blog/${slug}`}
-                        className="text-gray-900 dark:text-gray-100"
-                      >
+                      <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
                         {title}
                       </Link>
                     </h2>
@@ -58,7 +61,7 @@ export default function Home({ posts }) {
                   </div>
                 </article>
               </li>
-            );
+            )
           })}
         </ul>
         {/* <ul className="divide-y divide-gray-200 dark:divide-gray-700">
