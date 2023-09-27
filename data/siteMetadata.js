@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Roidev Blog',
   author: 'Roynaldi',
   headerTitle: 'RoiDev',
-  description: 'Sharing kegabutan semata',
+  description: `Let's Build world of Coding Anywhere & Anytime`,
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://roidev.my.id',
@@ -12,7 +12,7 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'prasbhara0604@gmail.com',
-  github: 'https://github.com',
+  github: 'https://github.com/roynaldi3301',
   twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com',
   youtube: 'https://youtube.com',
@@ -27,7 +27,7 @@ const siteMetadata = {
       umamiWebsiteId: process.env.NEXT_UMAMI_ID, // e.g. 123e4567-e89b-12d3-a456-426614174000
     },
     // plausibleAnalytics: {
-    //   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
+    //   plausibleDataDomain: 'roidev.my.id', // e.g. tailwind-nextjs-starter-blog.vercel.app
     // },
     // simpleAnalytics: {},
     // posthogAnalytics: {
