@@ -25,7 +25,7 @@ export default function Home({ posts }) {
             const { slug, date, title, summary, tags, images } = post
             return (
               <li key={slug} className="py-12 md:px-4">
-                <article className="rounded-lg shadow-lg p-4 hover:bg-gray-300 hover:dark:bg-gray-800 grid md:grid-cols-1 lg:grid-cols-4 gap-4">
+                <article className="rounded-lg shadow-lg p-4 bg-gray-100 dark:bg-gray-800 grid md:grid-cols-1 lg:grid-cols-4 gap-4">
                   <div className="mb-2 lg:col-span-1 lg:self-center">
                     <Image
                       width={500}
@@ -49,15 +49,15 @@ export default function Home({ posts }) {
                     <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                       {summary}
                     </div>
-                    <div className="text-base font-medium leading-6">
+                    {/* <div className="text-base font-medium leading-6">
                       <Link
                         href={`/blog/${slug}`}
-                        className="float-end text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                        aria-label={`Baca "${title}"`}
+                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                        aria-label={`Read "${title}"`}
                       >
-                        Lihat lebih banyak &rarr;
+                        Read more &rarr;
                       </Link>
-                    </div>
+                    </div> */}
                   </div>
                 </article>
               </li>
