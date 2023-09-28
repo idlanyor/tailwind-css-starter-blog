@@ -1,0 +1,397 @@
+---
+title: Struktur Data di Javascript
+date: '2023-09-28'
+tags: ['javascript', 'frontend', 'backend']
+draft: true
+layout: PostSimple
+images: '/static/images/strudat-js.png'
+summary: Mengetahui struktur data yang digunakan dalam mengembangkan web/aplikasi dengan bahasa javascript
+---
+
+## Pengenalan Struktur Data 
+Struktur data adalah cara yang digunakan untuk mengorganisasi dan menyimpan data dalam komputer atau sistem komputasi lainnya. Tujuannya adalah untuk memungkinkan kita untuk mengakses, menyimpan, dan mengelola data dengan efektif dan efisien.
+Struktur data penting untuk dipelajari sebagai basis fundamental,ketika pertama kali belajar bahasa pemrograman,karena sebagian besar kode program yang kita tulis nantinya,akan lebih banyak berkaitan dengan manipulasi data,seperti bagaimana sebuah data disimpan,dikelola,hingga ditampilkan ke User.
+beberapa Struktur data yang ada di bahasa pemrograman
+- Array
+- Object
+- Map
+- Linked List
+- Hash Table
+- Heap
+- Graph
+- Stack
+- Queue
+- dan masih banyak lagi
+
+waduh,banyak bangeet 🙄...Tenaaang,disini kita cuma bahas 4 struktur data yang sering dipake di Javascript kok,jangan dihapalin ya,cukup diinget aja xD
+
+
+## Beberapa Struktur Data yang ada di Javascript
+   di artikel ini,kita akan membahas 4 struktur data yang sering dipakai untuk mengolah data kompleks di Javascript,yaitu :
+   - Array
+   - Map
+   - Object
+   - Set
+
+   Oke,Let's Goo!!
+
+### Array
+Bagi sebagian kalian pasti udah ngga asing lagi nih,dengan istilah `Array`. Yups,Hampir semua bahasa pemrograman punya Struktur data `Array`. Jadi,apa itu `Array`?. Array merupakan struktur data yang terdiri dari elemen-elemen dengan tipe data yang sama dan diakses melalui indeks numerik. Array dapat menjadi satu dimensi (vektor) atau multi-dimensi (matriks).
+nih,ada beberapa poin penting best practice tentang array di javascript:
+Tentu, saya akan menjelaskan setiap poin dengan contoh kode di bawah ini:
+
+- **Deklarasi dan Inisialisasi**
+
+   Kita dapat membuat array di JavaScript dengan beberapa cara. Cara yang paling umum adalah dengan menggunakan tKita kurung siku `[]` dan memasukkan elemen-elemen array di dalamnya.
+   ```javascript
+   let myArray = [1, 2, 3, 4, 5];
+   ```
+
+- **Tipe Data Dinamis**
+
+   JavaScript adalah bahasa yang tipe datanya dinamis, sehingga elemen-elemen dalam array dapat memiliki tipe data yang berbeda. Ini berarti Kita dapat memiliki campuran tipe data dalam satu array.
+   ```javascript
+   let mixedArray = [1, "dua", true, null];
+   ```
+
+- **Indeks Berbasis Nol**
+
+   Seperti pada banyak bahasa pemrograman lainnya, indeks array di JavaScript dimulai dari 0. Artinya, elemen pertama dalam array memiliki indeks 0, elemen kedua memiliki indeks 1, dan seterusnya.
+   ```javascript
+   let myArray = [10, 20, 30];
+   console.log(myArray[0]); // Output: 10
+   ```
+
+- **Ukuran Dinamis**
+
+   Kita tidak perlu menentukan ukuran array saat deklarasi. Kita dapat menambahkan atau menghapus elemen dari array sesuai kebutuhan. JavaScript akan menangani perubahan ukuran array secara otomatis.
+   ```javascript
+   let dynamicArray = [];
+   dynamicArray.push(1); // Menambahkan elemen
+   dynamicArray.pop(); // Menghapus elemen terakhir
+   ```
+
+- **Fungsi-fungsi Bawaan Array**
+
+   JavaScript menyediakan berbagai metode bawaan yang dapat digunakan untuk memanipulasi array dengan mudah, seperti `push`, `pop`, `shift`, `unshift`, `splice`, `concat`, `slice`, dan lainnya.
+   ```javascript
+   let myArray = [1, 2, 3];
+   myArray.push(4); // Menambahkan elemen ke akhir
+   myArray.pop(); // Menghapus elemen terakhir
+   ```
+   jika kamu tertarik lebih lanjut mengenai fungsi bawaan array,kamu bisa mengunjungi link berikut ( [Fungsi bawaan Array Javascript](https://www.google.com) )
+
+- **Iterasi**
+
+   Kita dapat melakukan iterasi atau loop melalui elemen-elemen array menggunakan loop for, for...of, atau menggunakan metode seperti `forEach`, `map`, `filter`, dan `reduce`.
+   ```javascript
+   let myArray = [1, 2, 3];
+   myArray.forEach(function (element) {
+      console.log(element);
+   });
+   ```
+
+- **Referensi oleh Nilai**
+
+   Saat Kita menyalin array ke variabel lain, Kita sebenarnya mendapatkan referensi ke array asli. Ini berarti jika Kita mengubah array baru, itu juga akan memengaruhi array aslinya.
+   ```javascript
+   let originalArray = [1, 2, 3];
+   let copyArray = originalArray;
+   copyArray.push(4); // Memengaruhi originalArray juga
+   ```
+
+- **Array Multidimensi**
+
+   Kita dapat membuat array multidimensi di JavaScript dengan menempatkan array di dalam array. Ini dapat digunakan untuk menyimpan data dalam struktur yang lebih kompleks.
+   ```javascript
+   let multiArray = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+   console.log(multiArray[1][2]); // Output: 6
+   ```
+
+- **Pengujian Tipe Array**
+
+   Kita dapat menggunakan operator `Array.isArray()` untuk memeriksa apakah suatu variabel adalah array atau bukan.
+   ```javascript
+   let myArray = [1, 2, 3];
+   console.log(Array.isArray(myArray)); // true
+   ```
+
+- **Array Spread Operator**
+
+   JavaScript mendukung operator penyebaran (...) untuk menggabungkan atau menyalin array dengan cara yang mudah.
+
+   ```javascript
+      let array1 = [1, 2, 3];
+      let array2 = [...array1, 4, 5]; // Menggabungkan array1 dan elemen baru
+   ```
+### Objek
+
+**Objek** adalah struktur data yang kompleks yang dapat digunakan untuk mengelola dan menyimpan data dalam JavaScript. Objek memungkinkan Kita untuk mengelompokkan berbagai jenis data bersama-sama ke dalam satu entitas yang disebut properti. Properti-properti ini terdiri dari pasangan "kunci" (key) dan "nilai" (value), dan mereka mewakili karakteristik atau atribut dari objek tersebut.
+Objek adalah salah satu konsep paling penting dalam JavaScript, dan mereka digunakan untuk merepresentasikan berbagai entitas dalam kode, seperti objek dalam dunia nyata atau representasi data dalam aplikasi web. Objek memungkinkan Kita untuk mengorganisasi dan mengelola data dengan lebih baik dalam program JavaScript Kita.
+
+Berikut adalah beberapa poin penting tentang objek di JavaScript:
+
+- **Deklarasi Objek**
+
+   Kita dapat membuat objek dengan menggunakan tKita kurung kurawal `{}` dan mendefinisikan properti-properti di dalamnya.
+
+   Contoh:
+   ```javascript
+   let person = {
+       name: "John",
+       age: 30,
+       isStudent: false
+   };
+   ```
+
+- **Properti dan Nilai**
+
+   Objek terdiri dari properti (kunci) dan nilai. Properti adalah identifier yang digunakan untuk mengakses nilai.
+
+   Contoh:
+   ```javascript
+   console.log(person.name); // Output: "John"
+   console.log(person.age); // Output: 30
+   ```
+
+- **Tipe Data Properti**
+
+   Properti objek dapat memiliki tipe data yang berbeda, termasuk string, angka, boolean, array, objek lain, atau bahkan fungsi.
+
+   Contoh:
+   ```javascript
+   let book = {
+       title: "JavaScript Fundamentals",
+       pages: 300,
+       authors: ["Alice", "Bob"],
+       info: function() {
+           return `${this.title} by ${this.authors.join(', ')}`;
+       }
+   };
+   ```
+
+- **Mengakses Properti**
+
+   Kita dapat mengakses nilai properti objek dengan menggunakan notasi titik (`.`) atau notasi tKita kurung siku (`[]`).
+
+   Contoh:
+   ```javascript
+   console.log(book.title); // Output: "JavaScript Fundamentals"
+   console.log(book["authors"]); // Output: ["Alice", "Bob"]
+   ```
+
+- **Perubahan Properti**
+
+   Kita dapat mengubah nilai properti objek dengan memberikan nilai baru.
+
+   Contoh:
+   ```javascript
+   person.age = 31; // Mengubah nilai age menjadi 31
+   ```
+
+- **Menambahkan Properti Baru**
+
+   Kita dapat menambahkan properti baru ke objek setelah objek dibuat.
+
+   Contoh:
+   ```javascript
+   person.country = "USA"; // Menambahkan properti country
+   ```
+
+- **Menghapus Properti**
+
+   Kita dapat menghapus properti dari objek menggunakan operator `delete`.
+
+   Contoh:
+   ```javascript
+   delete person.isStudent; // Menghapus properti isStudent
+   ```
+
+- **Iterasi melalui Properti**
+
+   Kita dapat melakukan iterasi melalui semua properti objek menggunakan loop `for...in`.
+
+   Contoh:
+   ```javascript
+   for (let key in person) {
+       console.log(key + ": " + person[key]);
+   }
+   ```
+
+- **Objek Bersarang**
+
+   Objek dalam JavaScript dapat bersarang, artinya Kita dapat memiliki objek di dalam objek.
+
+   Contoh:
+   ```javascript
+   let student = {
+       name: "Alice",
+       info: {
+           major: "Computer Science",
+           year: 3
+       }
+   };
+   ```
+
+### Map
+Struktur data **Map** di JavaScript adalah koleksi pasangan kunci-nilai yang memungkinkan Kita untuk menyimpan dan mengakses data dengan cara yang lebih fleksibel daripada objek biasa. Map memungkinkan Kita menggunakan berbagai jenis tipe data sebagai kunci, termasuk objek, fungsi, dan bahkan elemen-elemen DOM dalam HTML. 
+Map adalah struktur data yang sangat berguna dalam JavaScript ketika Kita perlu mengelola data dengan kunci yang berbeda-beda dan membutuhkan fleksibilitas dalam tipe data yang dapat digunakan sebagai kunci. Ini juga sering digunakan dalam berbagai konteks pengembangan web untuk menyimpan data yang lebih terstruktur daripada objek sederhana.
+Berikut beberapa poin penting tentang Map di JavaScript:
+
+- **Deklarasi Map**
+
+   Kita dapat membuat Map dengan menggunakan constructor `Map()` tanpa argumen atau dengan memberikan iterable (seperti array) yang berisi pasangan kunci-nilai.
+
+   Contoh:
+   ```javascript
+   let myMap = new Map();
+   let bookMap = new Map([
+       ["title", "JavaScript Fundamentals"],
+       ["author", "John Doe"],
+       ["pages", 300]
+   ]);
+   ```
+
+- **Pasangan Kunci-Nilai**
+
+   Setiap elemen dalam Map adalah pasangan kunci-nilai. Kunci bersifat unik, yang berarti setiap kunci hanya ada satu kali dalam Map.
+
+   Contoh:
+   ```javascript
+   bookMap.set("publisher", "Acme Publishing");
+   ```
+
+- **Mengakses Nilai**
+
+   Kita dapat mengakses nilai yang sesuai dengan kunci menggunakan metode `get()`.
+
+   Contoh:
+   ```javascript
+   console.log(bookMap.get("title")); // Output: "JavaScript Fundamentals"
+   ```
+
+- **Menambahkan dan Mengubah Nilai**
+
+   Kita dapat menambahkan atau mengubah pasangan kunci-nilai menggunakan metode `set()`.
+
+   Contoh:
+   ```javascript
+   bookMap.set("pages", 350); // Mengubah nilai pages menjadi 350
+   bookMap.set("ISBN", "978-1234567890"); // Menambah pasangan kunci-nilai baru
+   ```
+
+- **Menghapus Pasangan Kunci-Nilai**
+
+   Kita dapat menghapus pasangan kunci-nilai menggunakan metode `delete()`.
+
+   Contoh:
+   ```javascript
+   bookMap.delete("author"); // Menghapus pasangan kunci-nilai dengan kunci "author"
+   ```
+
+- **Cek Ketersediaan Kunci**
+
+   Kita dapat memeriksa apakah suatu kunci ada dalam Map menggunakan metode `has()`.
+
+   Contoh:
+   ```javascript
+   console.log(bookMap.has("title")); // true
+   console.log(bookMap.has("price")); // false
+   ```
+
+- **Jumlah Pasangan Kunci-Nilai**
+
+   Kita dapat menghitung jumlah pasangan kunci-nilai dalam Map menggunakan properti `size`.
+
+   Contoh:
+   ```javascript
+   console.log(bookMap.size); // Output: 3 (setelah beberapa operasi)
+   ```
+
+- **Iterasi Melalui Map**
+
+   Kita dapat melakukan iterasi melalui pasangan kunci-nilai dalam Map menggunakan loop `for...of`.
+
+   Contoh:
+   ```javascript
+   for (let [key, value] of bookMap) {
+      console.log(key + ": " + value);
+   }
+   ```
+
+### Set 
+Struktur data **Set** di JavaScript adalah koleksi nilai-nilai unik, yang berarti setiap nilai hanya ada satu kali dalam Set. Set tidak memiliki pasangan kunci-nilai seperti Map, dan digunakan untuk menyimpan nilai-nilai unik tanpa duplikasi. Berikut adalah beberapa poin penting tentang Set di JavaScript:
+Set adalah struktur data yang berguna ketika Kita perlu menyimpan kumpulan nilai yang unik dan tidak ingin ada duplikasi. Set dapat digunakan untuk memeriksa keberadaan suatu nilai dalam kumpulan dengan efisien dan melakukan operasi-operasi set seperti gabungan, perbedaan, atau irisan antara dua Set.
+- **Deklarasi Set**
+
+   Kita dapat membuat Set dengan menggunakan constructor `Set()` tanpa argumen atau dengan memberikan iterable (seperti array) yang berisi nilai-nilai.
+
+   Contoh:
+   ```javascript
+   let mySet = new Set();
+   let uniqueNumbers = new Set([1, 2, 3, 2, 4, 5]);
+   ```
+
+- **Unik Nilai**
+
+   Set hanya dapat menyimpan nilai-nilai unik. Ini berarti jika Kita mencoba menambahkan nilai yang sama dua kali, hanya yang pertama akan disimpan.
+
+   Contoh:
+   ```javascript
+   let colors = new Set();
+   colors.add("red");
+   colors.add("blue");
+   colors.add("red"); // "red" yang kedua tidak akan disimpan
+   ```
+
+- **Mengakses Nilai**
+
+   Kita dapat mengakses nilai dalam Set menggunakan metode `has()` untuk memeriksa keberadaan nilai tertentu dan `forEach()` untuk melakukan iterasi melalui nilai-nilai dalam Set.
+
+   Contoh:
+   ```javascript
+   console.log(colors.has("red")); // true
+   colors.forEach(function(color) {
+      console.log(color);
+   });
+   ```
+
+- **Menghapus Nilai**
+
+   Kita dapat menghapus nilai dari Set menggunakan metode `delete()`.
+
+   Contoh:
+   ```javascript
+   colors.delete("blue"); // Menghapus nilai "blue"
+   ```
+
+- **Jumlah Nilai dalam Set**
+
+   Kita dapat menghitung jumlah nilai dalam Set menggunakan properti `size`.
+
+   Contoh:
+   ```javascript
+   console.log(colors.size); // Output: 1 (setelah penghapusan)
+   ```
+
+- **Mengosongkan Set**
+
+   Kita dapat menghapus semua nilai dari Set menggunakan metode `clear()`.
+
+   Contoh:
+   ```javascript
+   colors.clear(); // Mengosongkan Set
+   ```
+
+- **Iterasi Melalui Set**
+
+   Kita dapat melakukan iterasi melalui nilai-nilai dalam Set menggunakan loop `for...of`.
+
+   Contoh:
+   ```javascript
+   for (let color of colors) {
+      console.log(color);
+   }
+   ```
+
+
