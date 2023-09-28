@@ -36,11 +36,7 @@ export default function Projects() {
         <div className="container py-12 ">
           <div className="-m-4 flex flex-wrap justify-center">
             {stackData.map((d) => (
-              <CardTools
-                key={d.title}
-                title={d.title}
-                cat={d.description}
-              />
+              <CardTools key={d.title} title={d.title} cat={d.description} />
             ))}
           </div>
         </div>

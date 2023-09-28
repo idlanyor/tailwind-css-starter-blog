@@ -2,7 +2,7 @@ const stackData = [
   {
     title: 'C++',
     description: `Intermediate`,
-  },  
+  },
   {
     title: 'HTML & CSS',
     description: `Advanced`,

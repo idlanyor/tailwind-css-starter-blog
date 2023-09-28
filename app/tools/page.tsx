@@ -16,12 +16,7 @@ export default function Projects() {
         <div className="container py-12 ">
           <div className="-m-4 flex flex-wrap justify-center">
             {projectsData.map((d) => (
-              <Card
-                key={d.title}
-                title={d.title}
-                cat={d.categories}
-                href={d.href}
-              />
+              <Card key={d.title} title={d.title} cat={d.categories} href={d.href} />
             ))}
           </div>
         </div>
