@@ -36,7 +36,7 @@ export default function Home({ posts }) {
                     />
                   </div>
                   <div className="lg:col-span-3 space-y-3">
-                    <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                    <h2 className="text-2xl font-bold leading-8 tracking-tight hover:text-green-400">
                       <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
                         {title}
                       </Link>

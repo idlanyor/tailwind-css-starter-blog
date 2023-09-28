@@ -9,7 +9,7 @@ const siteMetadata = {
   siteUrl: 'https://roidev.my.id',
   siteRepo: 'https://github.com/roynaldi3301/tailwind-nextjs-starter-blog',
   siteLogo: '/static/images/logo.png',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/logo.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'prasbhara0604@gmail.com',
   github: 'https://github.com/roynaldi3301',
