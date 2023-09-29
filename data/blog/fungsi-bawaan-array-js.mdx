@@ -1,0 +1,133 @@
+---
+title: Built-in Function Array di JavaScript
+date: '2023-09-29'
+tags: ['javascript', 'struktur-data']
+draft: false
+layout: PostSimple
+images: '/static/images/array-built-in-js.png'
+summary: 'Array adalah salah satu tipe data yang paling sering digunakan di JavaScript. JavaScript menyediakan sejumlah fungsi bawaan yang memungkinkan Anda untuk memanipulasi dan mengolah data...'
+---
+
+
+Array adalah salah satu tipe data yang paling sering digunakan di JavaScript. 
+JavaScript menyediakan sejumlah fungsi bawaan yang memungkinkan Anda untuk memanipulasi dan mengolah data dalam array dengan efisien. 
+Dalam artikel ini, kita akan membahas berbagai fungsi bawaan yang dapat digunakan dalam operasi array.
+
+## 1. `push()`: Menambahkan Elemen Baru ke Akhir Array
+
+
+**Contoh:**
+```javascript
+let fruits = ['apel', 'pisang'];
+fruits.push('jeruk');
+// Hasil: ['apel', 'pisang', 'jeruk']
+```
+Fungsi `push()` digunakan untuk menambahkan satu atau lebih elemen ke akhir array. Dalam contoh yang diberikan, kita memulai dengan array `fruits` yang berisi dua elemen, yaitu 'apel' dan 'pisang'. Kemudian, kita menggunakan `push('jeruk')` untuk menambahkan elemen 'jeruk' ke akhir array. Hasilnya adalah `fruits` yang sekarang berisi `['apel', 'pisang', 'jeruk']`.
+
+## 2. `pop()`: Menghapus Elemen Terakhir dari Array
+
+
+**Contoh:**
+```javascript
+let fruits = ['apel', 'pisang', 'jeruk'];
+fruits.pop();
+// Hasil: ['apel', 'pisang']
+```
+Fungsi `pop()` digunakan untuk menghapus elemen terakhir dari array. Pada contoh sebelumnya, kita memiliki array `fruits` dengan tiga elemen, dan setelah menjalankan `pop()`, elemen terakhir ('jeruk') dihapus, sehingga array menjadi `['apel', 'pisang']`.
+
+## 3. `unshift()`: Menambahkan Elemen Baru ke Awal Array
+
+
+**Contoh:**
+```javascript
+let fruits = ['apel', 'pisang'];
+fruits.unshift('jeruk');
+// Hasil: ['jeruk', 'apel', 'pisang']
+```
+Fungsi `unshift()` digunakan untuk menambahkan satu atau lebih elemen ke awal array. Pada contohnya, kita awalnya memiliki array `fruits` dengan dua elemen, yaitu 'apel' dan 'pisang'. Kemudian, kita menggunakan `unshift('jeruk')` untuk menambahkan elemen 'jeruk' ke awal array, menghasilkan `['jeruk', 'apel', 'pisang']`.
+
+## 4. `shift()`: Menghapus Elemen Pertama dari Array
+
+
+**Contoh:**
+```javascript
+let fruits = ['jeruk', 'apel', 'pisang'];
+fruits.shift();
+// Hasil: ['apel', 'pisang']
+```
+Fungsi `shift()` digunakan untuk menghapus elemen pertama dari array. Pada contoh sebelumnya, kita memiliki array `fruits` dengan tiga elemen, dan setelah menjalankan `shift()`, elemen pertama ('jeruk') dihapus, sehingga array menjadi `['apel', 'pisang']`.
+
+## 5. `concat()`: Menggabungkan Dua atau Lebih Array
+
+
+**Contoh:**
+```javascript
+let fruits1 = ['apel', 'pisang'];
+let fruits2 = ['jeruk', 'mangga'];
+let allFruits = fruits1.concat(fruits2);
+// Hasil: ['apel', 'pisang', 'jeruk', 'mangga']
+```
+Fungsi `concat()` digunakan untuk menggabungkan dua atau lebih array menjadi satu array baru. Pada contohnya, kita memiliki dua array, `fruits1` dan `fruits2`, dan kita menggunakan `concat()` untuk menggabungkannya menjadi `allFruits`, yang berisi semua elemen dari kedua array tersebut.
+
+## 6. `slice()`: Membuat Salinan Bagian dari Array
+
+
+**Contoh:**
+```javascript
+let fruits = ['apel', 'pisang', 'jeruk', 'mangga'];
+let citrus = fruits.slice(2, 4);
+// Hasil: ['jeruk', 'mangga']
+```
+Fungsi `slice()` digunakan untuk membuat salinan bagian dari array. Dalam contohnya, kita menggunakan `slice(2, 4)` pada array `fruits`, yang berarti kita mengambil elemen dari indeks 2 (termasuk) hingga indeks 4 (tidak termasuk). Hasilnya adalah array baru yang berisi elemen 'jeruk' dan 'mangga'.
+
+## 7. `splice()`: Menghapus, Menambah, atau Menggantikan Elemen dalam Array
+
+
+**Contoh:**
+```javascript
+let fruits = ['apel', 'pisang', 'jeruk', 'mangga'];
+fruits.splice(1, 2, 'anggur', 'kiwi');
+// Hasil: ['apel', 'anggur', 'kiwi', 'mangga']
+```
+Fungsi `splice()` digunakan untuk menghapus, menambahkan, atau menggantikan elemen dalam array. Pada contohnya, kita menggunakan `splice(1, 2, 'anggur', 'kiwi')` pada array `fruits`, yang berarti kita menghapus 2 elemen mulai dari indeks 1, dan kemudian menambahkan 'anggur' dan 'kiwi' ke dalamnya. Hasilnya adalah array `fruits` yang termodifikasi.
+
+## 8. `forEach()`: Iterasi Melalui Setiap Elemen Array
+
+
+**Contoh:**
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+numbers.forEach(function(number) {
+  console.log(number);
+});
+// Hasil: 1 2 3 4 5
+```
+Fungsi `forEach()` digunakan untuk melakukan iterasi melalui setiap elemen dalam array dan menjalankan fungsi yang diberikan pada setiap elemen. Dalam contohnya, kita melakukan iterasi melalui array `numbers` dan mencetak setiap angka ke konsol.
+
+## 9. `map()`: Membuat Array Baru dengan Mengubah Setiap Elemen
+
+
+**Contoh:**
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+let doubled = numbers.map(function(number) {
+  return number * 2;
+});
+// Hasil: [2, 4, 6, 8, 10]
+```
+Fungsi `map()` digunakan untuk membuat array baru dengan mengubah setiap elemen array yang ada. Dalam contohnya, kita menggandakan setiap angka dalam array `numbers`, sehingga menghasilkan array baru yang berisi angka-angka yang telah digandakan.
+
+## 10. `filter()`: Membuat Array Baru dengan Elemen yang Memenuhi Kriteria
+
+
+**Contoh:**
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+let evenNumbers = numbers.filter(function(number) {
+  return number % 2 === 0;
+});
+// Hasil: [2, 4]
+```
+Fungsi `filter()` digunakan untuk membuat array baru dengan elemen yang memenuhi kriteria tertentu. Pada contohnya, kita membuat array baru `evenNumbers` yang hanya berisi angka genap dari array `numbers`.
+
+Itu tadi adalah beberapa built-in function yang sangat berguna dalam pengembangan web/aplikasi menggunakan bahasa Javascript. Dengan memahami dan menggunakan fungsi-fungsi ini, Anda dapat mengelola data dalam array dengan lebih efisien dalam kode JavaScript yang kita buat.
