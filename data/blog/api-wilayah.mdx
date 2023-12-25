@@ -1,0 +1,412 @@
+---
+title: Menampilkan Data Wilayah Indonesia dari API menggunakan VanillaJS
+date: '2023-12-25'
+tags: ['javascript', 'api']
+draft: false
+layout: PostSimple
+images: '/static/images/array-built-in-js.png'
+summary: 'pada file `index.html` pertama kita mendefinisikan kerangka atau struktur yang nantinya kita gunakan untuk melakukan manipulasi DOM(Document Object Model) di javascript...'
+---
+
+## Menampilkan Data Wilayah Indonesia dari API menggunakan VanillaJS
+
+> 
+> ### Yang harus disiapkan
+> - Visual Studio Code atau code editor lain(sublime text,notepad++,dll)
+> -  [Web Endpoint API](https://indo.rosevelt.my.id/api/documentation)
+> pengetahuan dasar tentang fondasi web(HTML,CSS,Javascript)
+>
+
+untuk praktek ini,kita hanya cukup menyiapkan 2 file saja yaitu `index.html` dan `script.js`
+
+`index.html`
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilayah Indonesia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-purple-300 py-8 px-4">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-3xl font-semibold mb-4">Wilayah Indonesia</h1>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Provinsi</h2>
+            <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Provinsi">
+                <option value="">-- Pilih Provinsi --</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Kabupaten</h2>
+            <select disabled class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Kabupaten">
+                <option value="">-- Pilih Provinsi Terlebih dahulu --</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Kecamatan</h2>
+            <select disabled class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Kecamatan">
+                <option value="">-- Pilih Kabupaten Terlebih dahulu --</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Kelurahan/Desa</h2>
+            <select disabled class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Kelurahan">
+                <option value="">-- Pilih Kecamatan Terlebih dahulu --</option>
+            </select>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+```
+pada file `index.html` pertama kita mendefinisikan kerangka atau struktur yang nantinya kita gunakan untuk melakukan manipulasi DOM(Document Object Model) di javascript
+
+file `index.html` akan tampil seperti ini :
+
+![Tampilan Index HTML ketika diakses dari browser](image-3.png)
+
+setelah kita membuat kerangka html,yang selanjutnya kita lakukan adalah melakukan operasi DOM Manipulation di javascript
+silahkan buat file `script.js` dan tuliskan kode berikut :
+
+```Javascript
+document.addEventListener('DOMContentLoaded', () => {
+    let idProvinsi = document.getElementById('Provinsi'); 
+    let idKabupaten = document.getElementById('Kabupaten'); 
+    let idKecamatan = document.getElementById('Kecamatan'); 
+    let idKelurahan = document.getElementById('Kelurahan'); 
+});
+```
+
+Mari kita bedah sedikit  dari syntax javascript diatas
+
+pada kode diatas,pertama kita menambahkan event yaitu `addEventListener('DOMContentLoaded')` untuk menunggu hingga seluruh konten dalam dokumen HTML (DOM) telah dimuat sebelum menjalankan sebuah fungsi,event tersebut memastikan struktur html telah dimuat secara sempurna sebelum kemudian kita mengolahnya dengan javascript,
+
+
+```Javascript
+let idProvinsi = document.getElementById('Provinsi');
+let idKabupaten = document.getElementById('Kabupaten');
+let idKecamatan = document.getElementById('Kecamatan');
+let idKelurahan = document.getElementById('Kelurahan');
+
+```
+Empat baris di atas digunakan untuk mengambil referensi terhadap elemen-elemen HTML dalam dokumen yang memiliki ID yang sesuai. 
+Dalam contoh tersebut, JavaScript akan mencari elemen-elemen yang memiliki ID: 'Provinsi', 'Kabupaten', 'Kecamatan', dan 'Kelurahan',dalam hal ini merujuk pada elemen select yang sudah kita buat sebelumnya di halaman HTML
+
+`document.getElementById('namaID')` adalah metode dalam DOM (Document Object Model) yang memungkinkan JavaScript untuk menemukan elemen HTML dengan ID yang sesuai. 
+Dalam kasus ini, elemen-elemen dengan ID `'Provinsi'`, `'Kabupaten'`, `'Kecamatan'`, dan `'Kelurahan'` akan disimpan dalam variabel masing-masing `(idProvinsi, idKabupaten, idKecamatan, dan idKelurahan)`.
+
+kemudian,setelah kita membuat element DOM,langkah yang selanjutnya dilakukan adalah mengirim sebuah permintaan ke API untuk mendapatkan data Provinsi
+
+```Javascript
+fetch('https://indo.rosevelt.my.id/api/provinsi')
+        .then(response => response.json())
+        .then(data => {
+            // kita akan melakukan manipulasi objek disini
+        })
+        .catch(error => {
+            // buat penanganan disini ketika kita gagal mengambil/mendapatkan data
+        });
+```
+
+pada kode diatas kita menggunakan `fetch` bawaan javascript ( sebenernya bisa juga sih pake `XMLHttpRequest` tapi saya lebih suka pakai ini xD )
+
+kemudian setelah kita berhasil melakukan `fetch`,kita akan mengolah datanya di dalam `then()`,dan menangani kejadian error menggunakan  `catch`
+
+pada kode diatas saya menggunakan fungsi `JSON.parse()` untuk mengubah json menjadi objek javascript yang dapat diakses
+
+oke,selanjutnya kita akan menampung data provinsi pada section kemudian menambahkan/meng `append` nya ke dalam select dengan id 'Provinsi'
+
+```Javascript
+... kode lainnya
+        .then((response) => {
+            let dataProvinsi = response.data
+            // Manipulasi DOM untuk menambahkan opsi Provinsi ke dalam dropdown
+            dataProvinsi.forEach(provinsi => {
+                let option = document.createElement('option');
+                option.value = provinsi.id;
+                option.text = provinsi.name;
+                idProvinsi.appendChild(option);
+            });
+        })
+...kode lainnya
+
+```
+
+pada kode diatas kita telah berhasil mengambil data yang kemudian diterasi menggunakan `forEach()` dengan : 
+- `provinsi.id` kita masukkan sebagai nilai dari atribut value pada option
+- `provinsi.name` kita masukkan sebagai teks/konten yang akan ditampilkan sebagai option
+
+sekarang seharusnya,web kita sudah bisa menampilkan data provinsi seperti ini :
+![Alt text](image-2.png)
+
+oke mantap,selanjutnya kita akan membuat agar option kabupaten akan menampilkan daftar kabupaten sesuai provinsinya
+dalam hal ini,kita akan memanfaatkan event `change` yang mana akan dieksekusi ketika si user memilih option pada bagian select provinsi
+langsung aja nih kodenya :
+``` Javascript
+...kode lainnya
+idProvinsi.addEventListener('change', (e) => {
+        let provinsiId = e.target.value;
+        let idKabupaten = document.getElementById('Kabupaten');
+
+        // Bersihkan dropdown Kabupaten saat pemilihan Provinsi berubah
+        idKabupaten.innerHTML = '<option value="">-- Pilih Kabupaten --</option>';
+        // menghapus atribut disabled pada option select
+        idKabupaten.removeAttribute('disabled')
+
+        // Ambil data Kabupaten sesuai Provinsi yang dipilih dari API
+        fetch(`https://indo.rosevelt.my.id/api/kabupaten?provinsi_id=${provinsiId}`)
+            .then(response => response.json())
+            .then(response => {
+                let dataKabupaten = response.data
+                // Manipulasi DOM untuk menambahkan opsi Kabupaten ke dalam dropdown
+                dataKabupaten.forEach(kabupaten => {
+                    let option = document.createElement('option');
+                    option.value = kabupaten.id;
+                    option.text = kabupaten.name;
+                    idKabupaten.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+    ...kode lainnya
+```
+
+sekarang kita berhasil mengambil data kabupaten sesuai dengan provinsi yang kita pilih sebelumnya
+
+![Kabupaten](image-4.png)
+
+lakukan juga hal yang sama pada kecamatan dan kelurahan
+berikut untuk event change kabupaten :
+```Javascript
+idKabupaten.addEventListener('change', (e) => {
+        let kabupatenId = e.target.value;
+
+        // Bersihkan dropdown Kecamatan saat pemilihan Kabupaten berubah
+        idKecamatan.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+        // Menghapus atribut disabled pada option select
+        idKecamatan.removeAttribute('disabled');
+
+        // Ambil data Kecamatan sesuai Kabupaten yang dipilih dari API
+        fetch(`https://indo.rosevelt.my.id/api/kecamatan?kabupaten_id=${kabupatenId}`)
+            .then(response => response.json())
+            .then(response => {
+                let dataKecamatan = response.data;
+                // Manipulasi DOM untuk menambahkan opsi Kecamatan ke dalam dropdown
+                dataKecamatan.forEach(kecamatan => {
+                    let option = document.createElement('option');
+                    option.value = kecamatan.id;
+                    option.text = kecamatan.name;
+                    idKecamatan.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+```
+hasilnya : 
+![kecamatan](image-5.png)
+
+oke., terakhir kita tambahkan kelurahan / desa
+```Javascript
+idKecamatan.addEventListener('change', (e) => {
+        let kecamatanId = e.target.value;
+
+        // Bersihkan dropdown Kelurahan saat pemilihan Kecamatan berubah
+        idKelurahan.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
+        // Menghapus atribut disabled pada option select
+        idKelurahan.removeAttribute('disabled');
+
+        // Ambil data Kelurahan sesuai Kecamatan yang dipilih dari API
+        fetch(`https://indo.rosevelt.my.id/api/kelurahan?kecamatan_id=${kecamatanId}`)
+            .then(response => response.json())
+            .then(response => {
+                let dataKelurahan = response.data;
+                // Manipulasi DOM untuk menambahkan opsi Kelurahan ke dalam dropdown
+                dataKelurahan.forEach(kelurahan => {
+                    let option = document.createElement('option');
+                    option.value = kelurahan.id;
+                    option.text = kelurahan.name;
+                    idKelurahan.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+```
+
+berikut hasilnya :
+![kelurahan](image-6.png)
+
+Yosh,selesai sudah,kita berhasil menampilkan data wilayah indonesia tanpa menyentuh database sedikitpun,tapi ingat,karena kita get api dari web lain,jadi pastikan kamu online/punya koneksi internet yaa...
+
+berikut keseluruhan kode dari hasil ngoding diatas :
+- HTML
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilayah Indonesia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-purple-300 py-8 px-4">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-3xl font-semibold mb-4">Wilayah Indonesia</h1>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Provinsi</h2>
+            <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Provinsi">
+                <option value="">-- Pilih Provinsi --</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Kabupaten</h2>
+            <select disabled class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Kabupaten">
+                <option value="">-- Pilih Provinsi Terlebih dahulu --</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Kecamatan</h2>
+            <select disabled class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Kecamatan">
+                <option value="">-- Pilih Kabupaten Terlebih dahulu --</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Kelurahan/Desa</h2>
+            <select disabled class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" name="" id="Kelurahan">
+                <option value="">-- Pilih Kecamatan Terlebih dahulu --</option>
+            </select>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+```
+- Javascript
+```Javascript
+document.addEventListener('DOMContentLoaded', () => {
+    let idProvinsi = document.getElementById('Provinsi');
+    let idKecamatan = document.getElementById('Kecamatan');
+    let idKabupaten = document.getElementById('Kabupaten');
+    let idKelurahan = document.getElementById('Kelurahan');
+
+
+    // Ambil data Provinsi dari API
+    fetch('https://indo.rosevelt.my.id/api/provinsi')
+        .then(response => response.json())
+        .then((response) => {
+            let dataProvinsi = response.data
+            // Manipulasi DOM untuk menambahkan opsi Provinsi ke dalam dropdown
+            dataProvinsi.forEach(provinsi => {
+                let option = document.createElement('option');
+                option.value = provinsi.id;
+                option.text = provinsi.name;
+                idProvinsi.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+
+    idProvinsi.addEventListener('change', (e) => {
+        let provinsiId = e.target.value;
+
+        // Bersihkan dropdown Kabupaten saat pemilihan Provinsi berubah
+        idKabupaten.innerHTML = '<option value="">-- Pilih Kabupaten --</option>';
+        // menghapus atribut disabled pada option select
+        idKabupaten.removeAttribute('disabled')
+
+        // Ambil data Kabupaten sesuai Provinsi yang dipilih dari API
+        fetch(`https://indo.rosevelt.my.id/api/kabupaten?provinsi_id=${provinsiId}`)
+            .then(response => response.json())
+            .then(response => {
+                let dataKabupaten = response.data
+                // Manipulasi DOM untuk menambahkan opsi Kabupaten ke dalam dropdown
+                dataKabupaten.forEach(kabupaten => {
+                    let option = document.createElement('option');
+                    option.value = kabupaten.id;
+                    option.text = kabupaten.name;
+                    idKabupaten.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+    idKabupaten.addEventListener('change', (e) => {
+        let kabupatenId = e.target.value;
+
+        // Bersihkan dropdown Kecamatan saat pemilihan Kabupaten berubah
+        idKecamatan.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+        // Menghapus atribut disabled pada option select
+        idKecamatan.removeAttribute('disabled');
+
+        // Ambil data Kecamatan sesuai Kabupaten yang dipilih dari API
+        fetch(`https://indo.rosevelt.my.id/api/kecamatan?kabupaten_id=${kabupatenId}`)
+            .then(response => response.json())
+            .then(response => {
+                let dataKecamatan = response.data;
+                // Manipulasi DOM untuk menambahkan opsi Kecamatan ke dalam dropdown
+                dataKecamatan.forEach(kecamatan => {
+                    let option = document.createElement('option');
+                    option.value = kecamatan.id;
+                    option.text = kecamatan.name;
+                    idKecamatan.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+    idKecamatan.addEventListener('change', (e) => {
+        let kecamatanId = e.target.value;
+
+        // Bersihkan dropdown Kelurahan saat pemilihan Kecamatan berubah
+        idKelurahan.innerHTML = '<option value="">-- Pilih Kelurahan --</option>';
+        // Menghapus atribut disabled pada option select
+        idKelurahan.removeAttribute('disabled');
+
+        // Ambil data Kelurahan sesuai Kecamatan yang dipilih dari API
+        fetch(`https://indo.rosevelt.my.id/api/kelurahan?kecamatan_id=${kecamatanId}`)
+            .then(response => response.json())
+            .then(response => {
+                let dataKelurahan = response.data;
+                // Manipulasi DOM untuk menambahkan opsi Kelurahan ke dalam dropdown
+                dataKelurahan.forEach(kelurahan => {
+                    let option = document.createElement('option');
+                    option.value = kelurahan.id;
+                    option.text = kelurahan.name;
+                    idKelurahan.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+
+
+});
+
+```
