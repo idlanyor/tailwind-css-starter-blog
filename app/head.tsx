@@ -12,6 +12,11 @@ export default function Head() {
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta name="google-adsense-account" content="ca-pub-3024635655876249"></meta>
+      <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3024635655876249"
+        crossOrigin="anonymous"
+      ></script>
     </>
   )
 }
