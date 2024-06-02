@@ -74,6 +74,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta name="google-adsense-account" content="ca-pub-3024635655876249" />
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3024635655876249"
+        crossorigin="anonymous"></script>
       <body className="bg-white/90 text-black antialiased dark:bg-[#1B1B1B] dark:text-white transition-colors duration-200">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
