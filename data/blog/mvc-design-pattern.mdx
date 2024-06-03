@@ -1,7 +1,7 @@
 ---
 title: 'Mengenal konsep Design Pattern model-View-Controller(MVC) di Javascript'
-date: '2023-09-27'
-lastmod: '2023-09-27'
+date: '2024-06-03'
+lastmod: '2024-06-03'
 tags: ['basic', 'javascript', 'node-js', 'ES6', 'web-dev']
 draft: false
 summary: 'Menggali konsep dasar design pattern populer untuk menciptakan antarmuka aplikasi yang efisien dan mudah dikelola.'
@@ -10,6 +10,165 @@ images: '/static/images/mvc-thumb.png'
 
 ![MVC Pattern](/static/images/mvc-thumb.png)
 
-## Design Pattern
+# Mengenal Konsep Design Pattern Model-View-Controller (MVC) di Javascript: The Ultimate Guide untuk Membuat Aplikasi yang Lebih Baik
 
-Koming soon
+Hai, para developer!
+
+Ketika kita membicarakan tentang membuat aplikasi web yang scalable dan maintainable, maka kita tidak bisa lepas dari konsep design pattern yang sangat populer, yaitu Model-View-Controller (MVC). Pada artikel ini, kita akan membahas tentang bagaimana menerapkan konsep MVC di Javascript dan membuat aplikasi yang lebih baik.
+
+## Apa itu MVC?
+
+MVC adalah sebuah konsep yang memisahkan aplikasi menjadi tiga bagian yang terpisah: Model, View, dan Controller. Konsep ini membantu kita membuat aplikasi yang lebih scalable, maintainable, dan mudah dalam pengembangan.
+
+* **Model**: Bagian ini berisi logika bisnis dan data aplikasi. Model berisi semua data dan logika yang dibutuhkan aplikasi untuk beroperasi.
+* **View**: Bagian ini berisi bagian tampilan aplikasi. View berisi kode-kode yang mengatur tampilan aplikasi dan cara data ditampilkan.
+* **Controller**: Bagian ini berisi logika yang menghubungkan Model dan View. Controller berisi kode-kode yang mengatur bagaimana aplikasi berinteraksi dengan pengguna.
+
+## Mengapa Menggunakan MVC?
+
+Menggunakan MVC memiliki beberapa kelebihan, yaitu:
+
+* **Scalability**: Aplikasi yang menggunakan MVC lebih mudah dalam pengembangan dan scaling karena setiap bagian aplikasi terpisah dan tidak bergantung pada bagian lain.
+* **Maintainability**: Aplikasi yang menggunakan MVC lebih mudah dalam maintenance karena setiap bagian aplikasi terpisah dan dapat diubah tanpa mempengaruhi bagian lain.
+* **Reusability**: Aplikasi yang menggunakan MVC dapat menggunakan kembali komponen-komponennya sehingga menghemat waktu dan sumber daya.
+
+### Bagaimana cara mengaplikasikannya?
+
+Okay, langkah pertama adalah membuat model. Model adalah bagian yang berisi data dan logika bisnis dari aplikasi kita. Pada contoh kita kali ini, kita akan membuat sebuah todo list sederhana.
+
+#### Step 1: Membuat Model
+
+Kita akan membuat sebuah file todo.model.js yang berisi kode seperti ini:
+
+```javascript
+class Todo {
+  constructor(title, description) {
+    this.title = title;
+    this.description = description;
+    this.completed = false;
+  }
+
+  toggleCompleted() {
+    this.completed = !this.completed;
+  }
+}
+
+export default Todo;
+```
+
+Pada kode di atas, kita membuat sebuah kelas Todo yang memiliki properti title, description, dan completed. Kita juga membuat sebuah method toggleCompleted() yang berfungsi untuk mengubah nilai completed menjadi true atau false.
+
+#### Step 2: Membuat View
+
+Selanjutnya, kita akan membuat sebuah file todo.view.js yang berisi kode seperti ini:
+
+```javascript
+class TodoView {
+  constructor(todo) {
+    this.todo = todo;
+  }
+
+  render() {
+    const todoElement = document.createElement("div");
+    todoElement.textContent = this.todo.title;
+    if (this.todo.completed) {
+      todoElement.style.textDecoration = "line-through";
+    }
+    return todoElement;
+  }
+}
+
+export default TodoView;
+```
+
+Pada kode di atas, kita membuat sebuah kelas TodoView yang memiliki properti todo. Kita juga membuat sebuah method render() yang berfungsi untuk membuat sebuah elemen HTML yang berisi judul todo dan memiliki style yang berbeda-beda tergantung nilai completed.
+
+#### Step 3: Membuat Controller
+
+Kita akan membuat sebuah file todo.controller.js yang berisi kode seperti ini:
+
+```javascript
+class TodoController {
+  constructor(model, view) {
+    this.model = model;
+    this.view = view;
+  }
+
+  addTodo(title, description) {
+    const todo = new this.model(title, description);
+    this.view.render(todo);
+  }
+
+  toggle Todo(todo) {
+    todo.toggleCompleted();
+    this.view.render(todo);
+  }
+}
+
+export default TodoController;
+```
+
+Pada kode di atas, kita membuat sebuah kelas TodoController yang memiliki properti model dan view. Kita juga membuat dua method, yakni addTodo() yang berfungsi untuk membuat todo baru dan toggleTodo() yang berfungsi untuk mengubah nilai completed sebuah todo.
+
+#### Step 4: Membuat Aplikasi
+
+Selanjutnya, kita akan membuat sebuah file `index.html` yang berisi kode seperti ini:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <ul id="todo-list"></ul>
+  <input type="text" id="new-todo" placeholder="Tambah todo baru">
+  <button id="add-todo">Tambah</button>
+
+  <script src="todo.model.js"></script>
+  <script src="todo.view.js"></script>
+  <script src="todo.controller.js"></script>
+  <script>
+    const todoController = new TodoController(Todo, TodoView);
+
+    document.getElementById("add-todo").addEventListener("click", () => {
+      const title = document.getElementById("new-todo").value;
+      const description = "";
+      todoController.addTodo(title, description);
+    });
+
+    document.getElementById("todo-list").addEventListener("click", (event) => {
+      if (event.target.tagName === "LI") {
+        const todo = event.target.todo;
+        todoController.toggleTodo(todo);
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+Pada kode di atas, kita membuat sebuah aplikasi todo list sederhana yang dapat menambahkan todo baru dan mengubah nilai completed sebuah todo.
+
+## Kekurangan & Kelebihan MVC
+
+### Pros (Kelebihan)
+
+- **Struktur yang Rapi**: MVC membuat struktur kode kita jadi lebih terorganisir dan mudah dipahami. Model menangani data, View menangani tampilan, dan Controller menangani logika bisnis. It's like a perfect trio, guys!
+- **Reusable Code**: Dengan MVC, kita bisa menggunakan kode yang sama untuk berbagai tujuan. Misalnya, kita bisa menggunakan model yang sama untuk menampilkan data di berbagai halaman.
+- **Easy Maintenance**: Karena struktur kode yang rapi, kita bisa dengan mudah memperbarui atau mengubah kode tanpa mengganggu bagian lain dari aplikasi.
+
+### Cons (Kelemahan)
+
+- **Over-Engineering**: MVC bisa membuat kita terlalu banyak berpikir tentang struktur kode dan lupa tentang tujuan akhir dari aplikasi kita. It's like, "Oh, saya harus membuat sebuah model untuk itu, dan view untuk ini, dan controller untuk itu..." brain explodes
+- **Steep Learning Curve**: Bagi mereka yang baru belajar Javascript, MVC bisa menjadi sangat membingungkan. It's like trying to learn a new language, guys!
+- **Overhead**: MVC memerlukan lebih banyak kode dan resource, sehingga bisa membuat aplikasi kita menjadi lebih lambat.
+
+## Konklusi
+
+Mengaplikasikan konsep MVC di Javascript adalah cara yang efektif untuk membuat aplikasi yang scalable, maintainable, dan mudah dalam pengembangan. Dengan menggunakan library seperti Backbone.js atau Ember.js, kita dapat membantu mengaplikasikan konsep MVC di Javascript dengan lebih mudah.
+
+Dan itu adalah contoh sederhana tentang bagaimana mengaplikasikan MVC di Javascript. Kita telah membuat sebuah aplikasi todo list yang terbagi menjadi tiga bagian, yakni Model, View, dan Controller. Dengan menggunakan pattern MVC, kita dapat membuat aplikasi yang lebih mudah dipahami dan di-maintenance.
+
+**Sekian, sampai jumpa di artikel selanjutnya!**
