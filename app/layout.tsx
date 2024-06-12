@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <script>(function(s,u,z,p){s.src = u, s.setAttribute('data-zone', z), p.appendChild(s);})(document.createElement('script'),'https://zovidree.com/tag.min.js',7602578,document.body||document.documentElement)</script>
+     
       <script src="https://alwingulla.com/88/tag.min.js" data-zone="72318" async data-cfasync="false"></script>
       <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
