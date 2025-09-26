@@ -15,7 +15,6 @@ const nextConfig = {
   },
   transpilePackages: ['pliny'],
   experimental: {
-    legacyBrowsers: false,
     mdxRs: true
   },
   webpack: (config, options) => {

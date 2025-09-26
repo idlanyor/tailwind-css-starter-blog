@@ -1,9 +1,8 @@
-import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer2/source-files'
+import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
 import { writeFileSync } from 'fs'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import path from 'path'
-// Remark packages
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import {
