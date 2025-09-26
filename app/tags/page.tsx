@@ -4,9 +4,9 @@ import { slug } from 'github-slugger'
 import tagData from 'app/tag-data.json'
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ 
-  title: 'Tags', 
-  description: 'Jelajahi artikel berdasarkan topik dan kategori yang menarik' 
+export const metadata = genPageMetadata({
+  title: 'Tags',
+  description: 'Jelajahi artikel berdasarkan topik dan kategori yang menarik',
 })
 
 export default async function Page() {
@@ -28,20 +28,25 @@ export default async function Page() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-8">
             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
+                clipRule="evenodd"
+              />
             </svg>
             Eksplorasi Topik
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             Jelajahi Artikel
             <span className="block bg-gradient-to-r from-primary-600 to-pink-600 bg-clip-text text-transparent">
               Berdasarkan Tags
             </span>
           </h1>
-          
+
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-            Temukan artikel menarik dari {totalTags} kategori berbeda dengan total {totalPosts} artikel yang telah dipublikasikan
+            Temukan artikel menarik dari {totalTags} kategori berbeda dengan total {totalPosts}{' '}
+            artikel yang telah dipublikasikan
           </p>
 
           {/* Stats */}
@@ -50,9 +55,7 @@ export default async function Page() {
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-400">
                 {totalTags}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                Total Tags
-              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Total Tags</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-400">
@@ -78,8 +81,18 @@ export default async function Page() {
         {tagKeys.length === 0 ? (
           <div className="text-center py-16">
             <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
-              <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              <svg
+                className="w-12 h-12 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                />
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -106,7 +119,7 @@ export default async function Page() {
                 {popularTags.map((tag, index) => {
                   const count = tagCounts[tag]
                   const percentage = Math.round((count / totalPosts) * 100)
-                  
+
                   return (
                     <Link
                       key={tag}
@@ -118,18 +131,27 @@ export default async function Page() {
                         {/* Background Pattern */}
                         <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
                           <svg className="w-full h-full" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                            <path
+                              fillRule="evenodd"
+                              d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
+                              clipRule="evenodd"
+                            />
                           </svg>
                         </div>
 
                         {/* Rank Badge */}
                         <div className="absolute top-4 right-4">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${
-                            index === 0 ? 'bg-yellow-500' : 
-                            index === 1 ? 'bg-gray-400' : 
-                            index === 2 ? 'bg-orange-500' : 
-                            'bg-primary-500'
-                          }`}>
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${
+                              index === 0
+                                ? 'bg-yellow-500'
+                                : index === 1
+                                ? 'bg-gray-400'
+                                : index === 2
+                                ? 'bg-orange-500'
+                                : 'bg-primary-500'
+                            }`}
+                          >
                             #{index + 1}
                           </div>
                         </div>
@@ -137,8 +159,16 @@ export default async function Page() {
                         <div className="relative">
                           {/* Tag Icon */}
                           <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <svg className="w-6 h-6 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                            <svg
+                              className="w-6 h-6 text-primary-600 dark:text-primary-400"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                           </div>
 
@@ -170,7 +200,7 @@ export default async function Page() {
                           {/* Progress Bar */}
                           <div className="mt-4">
                             <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                              <div 
+                              <div
                                 className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full transition-all duration-500 group-hover:from-primary-400 group-hover:to-primary-500"
                                 style={{ width: `${percentage}%` }}
                               ></div>
@@ -227,21 +257,42 @@ export default async function Page() {
                 Tidak menemukan topik yang dicari?
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                Jelajahi semua artikel kami atau gunakan fitur pencarian untuk menemukan konten yang sesuai dengan minat Anda
+                Jelajahi semua artikel kami atau gunakan fitur pencarian untuk menemukan konten yang
+                sesuai dengan minat Anda
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/blog"
                   className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
                 >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                    />
                   </svg>
                   Lihat Semua Artikel
                 </Link>
                 <button className="inline-flex items-center px-6 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
                   </svg>
                   Cari Artikel
                 </button>

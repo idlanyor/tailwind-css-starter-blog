@@ -36,33 +36,22 @@ const ToolCard = ({ title, categories, href, description }: ToolCardProps) => {
       <div className="tool-card-inner">
         {/* Icon and Category Badge */}
         <div className="flex items-center justify-between mb-4">
-          <div className="tool-icon">
-            {getIcon(categories)}
-          </div>
+          <div className="tool-icon">{getIcon(categories)}</div>
           <span className={`tool-category-badge ${getCategoryColor(categories)}`}>
             {categories}
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="tool-title">
-          {title}
-        </h3>
+        <h3 className="tool-title">{title}</h3>
 
         {/* Description */}
-        {description && (
-          <p className="tool-description">
-            {description}
-          </p>
-        )}
+        {description && <p className="tool-description">{description}</p>}
 
         {/* Action Button */}
         {href && (
           <div className="mt-6">
-            <Link
-              href={href}
-              className="tool-action-button"
-            >
+            <Link href={href} className="tool-action-button">
               <span>Use Tool</span>
               <FiExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>

@@ -29,7 +29,8 @@ export default function Home({ posts }) {
               </span>
             </h1>
             <p className="max-w-2xl mx-auto text-xl leading-8 text-gray-600 dark:text-gray-300">
-              Jelajahi dunia pemrograman dengan tutorial, tips, dan insight terbaru dari pengalaman coding sehari-hari.
+              Jelajahi dunia pemrograman dengan tutorial, tips, dan insight terbaru dari pengalaman
+              coding sehari-hari.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
               <Link
@@ -38,7 +39,11 @@ export default function Home({ posts }) {
               >
                 Mulai Membaca
                 <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </Link>
               <Link
@@ -57,8 +62,18 @@ export default function Home({ posts }) {
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
           <div className="flex items-center">
             <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30">
-              <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              <svg
+                className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
               </svg>
             </div>
             <div className="ml-4">
@@ -70,13 +85,23 @@ export default function Home({ posts }) {
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
           <div className="flex items-center">
             <div className="p-3 rounded-lg bg-green-100 dark:bg-green-900/30">
-              <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              <svg
+                className="w-6 h-6 text-green-600 dark:text-green-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                />
               </svg>
             </div>
             <div className="ml-4">
               <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                {Array.from(new Set(posts.flatMap(post => post.tags))).length}
+                {Array.from(new Set(posts.flatMap((post) => post.tags))).length}
               </p>
               <p className="text-gray-600 dark:text-gray-400">Kategori</p>
             </div>
@@ -85,8 +110,18 @@ export default function Home({ posts }) {
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
           <div className="flex items-center">
             <div className="p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30">
-              <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <svg
+                className="w-6 h-6 text-purple-600 dark:text-purple-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
               </svg>
             </div>
             <div className="ml-4">
@@ -111,11 +146,23 @@ export default function Home({ posts }) {
         {!posts.length && (
           <div className="text-center py-12">
             <div className="mx-auto w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
-              <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <svg
+                className="w-12 h-12 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
               </svg>
             </div>
-            <p className="text-gray-500 dark:text-gray-400 text-lg">Belum ada artikel yang dipublikasikan.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-lg">
+              Belum ada artikel yang dipublikasikan.
+            </p>
           </div>
         )}
 
@@ -155,8 +202,8 @@ export default function Home({ posts }) {
                         )}
                       </div>
                       <h3 className="text-2xl lg:text-3xl font-bold leading-tight tracking-tight mb-4">
-                        <Link 
-                          href={`/blog/${slug}`} 
+                        <Link
+                          href={`/blog/${slug}`}
                           className="text-gray-900 dark:text-gray-100 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200"
                         >
                           {title}
@@ -171,8 +218,18 @@ export default function Home({ posts }) {
                         aria-label={`Baca "${title}"`}
                       >
                         Baca Artikel Lengkap
-                        <svg className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <svg
+                          className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
                         </svg>
                       </Link>
                     </div>
@@ -189,7 +246,10 @@ export default function Home({ posts }) {
             {posts.slice(1, MAX_DISPLAY).map((post) => {
               const { slug, date, title, summary, tags, images } = post
               return (
-                <article key={slug} className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <article
+                  key={slug}
+                  className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                >
                   <div className="relative h-48">
                     <Image
                       width={600}
@@ -212,8 +272,8 @@ export default function Home({ posts }) {
                       )}
                     </div>
                     <h3 className="text-xl font-bold leading-tight tracking-tight mb-3">
-                      <Link 
-                        href={`/blog/${slug}`} 
+                      <Link
+                        href={`/blog/${slug}`}
                         className="text-gray-900 dark:text-gray-100 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200"
                       >
                         {title}
@@ -228,8 +288,18 @@ export default function Home({ posts }) {
                       aria-label={`Baca "${title}"`}
                     >
                       Baca Selengkapnya
-                      <svg className="ml-2 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <svg
+                        className="ml-2 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
                       </svg>
                     </Link>
                   </div>
@@ -250,7 +320,12 @@ export default function Home({ posts }) {
           >
             Lihat Semua Artikel
             <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </Link>
         </div>
@@ -264,7 +339,8 @@ export default function Home({ posts }) {
               Tetap Update dengan Artikel Terbaru
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-              Dapatkan notifikasi langsung ke email Anda setiap kali ada artikel baru tentang programming dan teknologi.
+              Dapatkan notifikasi langsung ke email Anda setiap kali ada artikel baru tentang
+              programming dan teknologi.
             </p>
             <NewsletterForm />
           </div>

@@ -2,9 +2,9 @@ import { Suspense } from 'react'
 import { genPageMetadata } from 'app/seo'
 import ProjectsClient from './ProjectsClient'
 
-export const metadata = genPageMetadata({ 
+export const metadata = genPageMetadata({
   title: 'Projects',
-  description: 'My GitHub repositories and open source projects'
+  description: 'My GitHub repositories and open source projects',
 })
 
 // Loading component
@@ -42,7 +42,7 @@ export default function ProjectsPage() {
                 <span className="mr-2">🚀</span>
                 Open Source Projects
               </div>
-              
+
               {/* Title with Gradient */}
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
                 <span className="block text-gray-900 dark:text-white">My</span>
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
                   Projects
                 </span>
               </h1>
-              
+
               {/* Subtitle */}
               <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
                 Explore my GitHub repositories and open source contributions

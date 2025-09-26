@@ -37,7 +37,7 @@ export default function ProjectsClient() {
           `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
           {
             headers: {
-              'Accept': 'application/vnd.github.v3+json',
+              Accept: 'application/vnd.github.v3+json',
             },
           }
         )
@@ -47,12 +47,12 @@ export default function ProjectsClient() {
         }
 
         const data: Repository[] = await response.json()
-        
+
         // Filter out archived repositories and sort by stars
         const filteredData = data
-          .filter(repo => !repo.archived)
+          .filter((repo) => !repo.archived)
           .sort((a, b) => b.stargazers_count - a.stargazers_count)
-        
+
         setRepositories(filteredData)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
@@ -64,7 +64,7 @@ export default function ProjectsClient() {
     fetchRepositories()
   }, [])
 
-  const filteredRepositories = repositories.filter(repo => {
+  const filteredRepositories = repositories.filter((repo) => {
     if (filter === 'original') return !repo.fork
     if (filter === 'forks') return repo.fork
     return true
@@ -96,7 +96,7 @@ export default function ProjectsClient() {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     })
   }
 
@@ -163,7 +163,7 @@ export default function ProjectsClient() {
           </div>
           <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
             <div className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-              {new Set(repositories.map(repo => repo.language).filter(Boolean)).size}
+              {new Set(repositories.map((repo) => repo.language).filter(Boolean)).size}
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">Languages</div>
           </div>
@@ -175,8 +175,12 @@ export default function ProjectsClient() {
         <div className="flex flex-wrap gap-2">
           {[
             { key: 'all', label: 'All Repositories', count: repositories.length },
-            { key: 'original', label: 'Original', count: repositories.filter(r => !r.fork).length },
-            { key: 'forks', label: 'Forks', count: repositories.filter(r => r.fork).length },
+            {
+              key: 'original',
+              label: 'Original',
+              count: repositories.filter((r) => !r.fork).length,
+            },
+            { key: 'forks', label: 'Forks', count: repositories.filter((r) => r.fork).length },
           ].map(({ key, label, count }) => (
             <button
               key={key}
@@ -188,9 +192,7 @@ export default function ProjectsClient() {
               }`}
             >
               {label}
-              <span className="ml-2 px-2 py-1 bg-white/20 rounded-full text-xs">
-                {count}
-              </span>
+              <span className="ml-2 px-2 py-1 bg-white/20 rounded-full text-xs">{count}</span>
             </button>
           ))}
         </div>
@@ -199,10 +201,7 @@ export default function ProjectsClient() {
       {/* Repositories Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredRepositories.map((repo) => (
-          <div
-            key={repo.id}
-            className="project-card group"
-          >
+          <div key={repo.id} className="project-card group">
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
@@ -292,7 +291,9 @@ export default function ProjectsClient() {
       {filteredRepositories.length === 0 && (
         <div className="text-center py-12">
           <FiCode className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-          <p className="text-lg font-semibold text-gray-900 dark:text-white">No repositories found</p>
+          <p className="text-lg font-semibold text-gray-900 dark:text-white">
+            No repositories found
+          </p>
           <p className="text-gray-600 dark:text-gray-400">Try adjusting your filter</p>
         </div>
       )}

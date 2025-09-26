@@ -12,15 +12,12 @@ interface CertificateCardProps {
 
 const CertificateCard = ({ title, description, imgSrc, href, index = 0 }: CertificateCardProps) => {
   // Extract date from description if it exists
-  const dateMatch = description.match(/(\d{1,2}\s\w+\s\d{4})/);
-  const date = dateMatch ? dateMatch[1] : '';
-  const provider = description.replace(/\s*-\s*\d{1,2}\s\w+\s\d{4}/, '').trim();
+  const dateMatch = description.match(/(\d{1,2}\s\w+\s\d{4})/)
+  const date = dateMatch ? dateMatch[1] : ''
+  const provider = description.replace(/\s*-\s*\d{1,2}\s\w+\s\d{4}/, '').trim()
 
   return (
-    <div 
-      className="certificate-card group"
-      style={{ animationDelay: `${index * 0.1}s` }}
-    >
+    <div className="certificate-card group" style={{ animationDelay: `${index * 0.1}s` }}>
       {/* Certificate Badge */}
       <div className="absolute top-4 right-4 z-10">
         <div className="certificate-badge">
@@ -57,9 +54,7 @@ const CertificateCard = ({ title, description, imgSrc, href, index = 0 }: Certif
       {/* Content Section */}
       <div className="certificate-content">
         {/* Provider */}
-        <div className="certificate-provider">
-          {provider}
-        </div>
+        <div className="certificate-provider">{provider}</div>
 
         {/* Title */}
         <h3 className="certificate-title">
