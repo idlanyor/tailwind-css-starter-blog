@@ -6,13 +6,13 @@ import path from 'path'
 // Remark packages
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+// Update these imports to use the specific files
 import {
   remarkExtractFrontmatter,
   remarkCodeTitles,
   remarkImgToJsx,
   extractTocHeadings,
-} from 'pliny/mdx-plugins/index.js'
-// Rehype packages
+} from 'pliny/mdx-plugins' // Change from /index.js to .js
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeKatex from 'rehype-katex'
