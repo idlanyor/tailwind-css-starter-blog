@@ -1,4 +1,4 @@
-import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
+import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer2/source-files'
 import { writeFileSync } from 'fs'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
@@ -6,13 +6,13 @@ import path from 'path'
 // Remark packages
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
-// Update these imports to use the specific files
 import {
   remarkExtractFrontmatter,
   remarkCodeTitles,
   remarkImgToJsx,
   extractTocHeadings,
-} from 'pliny/mdx-plugins' // Change from /index.js to .js
+} from 'pliny/mdx-plugins/index.js'
+// Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeKatex from 'rehype-katex'

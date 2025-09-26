@@ -184,7 +184,7 @@ export default function ProjectsClient() {
           ].map(({ key, label, count }) => (
             <button
               key={key}
-              onClick={() => setFilter(key as any)}
+              onClick={() => setFilter(key as 'all' | 'original' | 'forks')}
               className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                 filter === key
                   ? 'bg-primary-600 text-white shadow-lg'

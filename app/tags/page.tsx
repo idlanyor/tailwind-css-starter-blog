@@ -146,10 +146,10 @@ export default async function Page() {
                               index === 0
                                 ? 'bg-yellow-500'
                                 : index === 1
-                                ? 'bg-gray-400'
-                                : index === 2
-                                ? 'bg-orange-500'
-                                : 'bg-primary-500'
+                                  ? 'bg-gray-400'
+                                  : index === 2
+                                    ? 'bg-orange-500'
+                                    : 'bg-primary-500'
                             }`}
                           >
                             #{index + 1}

@@ -333,9 +333,9 @@ export default function ListLayoutWithTags({
 
                         {/* Tags */}
                         <div className="flex flex-wrap gap-2 mb-4">
-                          {tags
-                            ?.slice(0, isFirst ? 4 : 3)
-                            .map((tag) => <Tag key={tag} text={tag} />)}
+                          {tags?.slice(0, isFirst ? 4 : 3).map((tag) => (
+                            <Tag key={tag} text={tag} />
+                          ))}
                           {tags && tags.length > (isFirst ? 4 : 3) && (
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                               +{tags.length - (isFirst ? 4 : 3)} lainnya

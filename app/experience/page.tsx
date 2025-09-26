@@ -187,8 +187,8 @@ export default function Experience() {
                               level === 'Advanced'
                                 ? '90%'
                                 : level === 'Intermediate'
-                                ? '70%'
-                                : '50%',
+                                  ? '70%'
+                                  : '50%',
                           }}
                         ></div>
                       </div>
