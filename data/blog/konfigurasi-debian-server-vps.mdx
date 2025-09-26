@@ -1,0 +1,679 @@
+---
+title: 'Cara Konfigurasi Debian Server di VPS untuk Pemula (SysAdmin)'
+date: '2024-02-16'
+lastmod: '2024-02-16'
+tags: ['debian', 'server', 'vps', 'sysadmin', 'linux']
+draft: false
+summary: 'Panduan lengkap konfigurasi Debian server di VPS dari awal hingga siap production untuk pemula yang ingin belajar system administration'
+layout: PostSimple
+images: ['/static/images/debian-server-thumb.png']
+---
+
+# Cara Konfigurasi Debian Server di VPS untuk Pemula (SysAdmin)
+
+Sebagai seorang developer atau system administrator pemula, mengelola server Linux adalah skill yang sangat penting. Debian adalah salah satu distribusi Linux yang paling stabil dan banyak digunakan untuk server production. Dalam panduan ini, kita akan belajar cara mengkonfigurasi Debian server di VPS dari awal hingga siap untuk production.
+
+## Persiapan Awal
+
+### Yang Harus Disiapkan
+- **VPS dengan Debian** (DigitalOcean, Vultr, Linode, atau provider lainnya)
+- **SSH Client** (Terminal di Linux/Mac, PuTTY di Windows)
+- **Domain** (opsional, untuk konfigurasi web server)
+- **Koneksi internet yang stabil**
+
+### Informasi yang Diperlukan
+- IP Address VPS
+- Username (biasanya `root`)
+- Password atau SSH Key
+- Port SSH (default: 22)
+
+## Step 1: Koneksi Awal ke Server
+
+### Menggunakan SSH
+```bash
+# Koneksi menggunakan password
+ssh root@your-server-ip
+
+# Atau menggunakan SSH key
+ssh -i /path/to/private-key root@your-server-ip
+
+# Dengan port custom
+ssh -p 2222 root@your-server-ip
+```
+
+### First Login
+Setelah berhasil login, Anda akan melihat prompt seperti ini:
+```bash
+root@debian-server:~#
+```
+
+## Step 2: Update dan Upgrade System
+
+Langkah pertama yang **WAJIB** dilakukan adalah memperbarui system:
+
+```bash
+# Update package list
+apt update
+
+# Upgrade semua package yang terinstall
+apt upgrade -y
+
+# Upgrade distribution (opsional)
+apt dist-upgrade -y
+
+# Clean up
+apt autoremove -y
+apt autoclean
+```
+
+### Mengecek Versi Debian
+```bash
+# Cek versi Debian
+cat /etc/debian_version
+
+# Informasi system lengkap
+uname -a
+
+# Informasi OS
+lsb_release -a
+```
+
+## Step 3: Konfigurasi User dan Security
+
+### Membuat User Non-Root
+**PENTING**: Jangan gunakan root untuk aktivitas sehari-hari!
+
+```bash
+# Buat user baru
+adduser username
+
+# Tambahkan ke grup sudo
+usermod -aG sudo username
+
+# Cek grup user
+groups username
+
+# Switch ke user baru
+su - username
+```
+
+### Konfigurasi SSH Security
+
+#### 1. Backup Konfigurasi SSH
+```bash
+cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
+```
+
+#### 2. Edit Konfigurasi SSH
+```bash
+nano /etc/ssh/sshd_config
+```
+
+#### 3. Konfigurasi Keamanan SSH
+```bash
+# Ubah port default (opsional tapi direkomendasikan)
+Port 2222
+
+# Disable root login
+PermitRootLogin no
+
+# Hanya izinkan user tertentu
+AllowUsers username
+
+# Disable password authentication (jika menggunakan SSH key)
+PasswordAuthentication no
+
+# Disable empty passwords
+PermitEmptyPasswords no
+
+# Limit login attempts
+MaxAuthTries 3
+
+# Connection timeout
+ClientAliveInterval 300
+ClientAliveCountMax 2
+```
+
+#### 4. Restart SSH Service
+```bash
+systemctl restart sshd
+systemctl status sshd
+```
+
+### Setup SSH Key Authentication
+
+#### Di Local Machine (Client):
+```bash
+# Generate SSH key pair
+ssh-keygen -t rsa -b 4096 -C "your-email@example.com"
+
+# Copy public key ke server
+ssh-copy-id -p 2222 username@your-server-ip
+```
+
+#### Di Server:
+```bash
+# Cek authorized_keys
+cat ~/.ssh/authorized_keys
+
+# Set permission yang benar
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
+
+## Step 4: Konfigurasi Firewall (UFW)
+
+### Install dan Setup UFW
+```bash
+# Install UFW (biasanya sudah terinstall)
+apt install ufw -y
+
+# Reset ke default
+ufw --force reset
+
+# Default policies
+ufw default deny incoming
+ufw default allow outgoing
+
+# Allow SSH (sesuaikan dengan port Anda)
+ufw allow 2222/tcp
+
+# Allow HTTP dan HTTPS
+ufw allow 80/tcp
+ufw allow 443/tcp
+
+# Enable firewall
+ufw enable
+
+# Cek status
+ufw status verbose
+```
+
+### Contoh Rules Tambahan
+```bash
+# Allow specific IP
+ufw allow from 192.168.1.100
+
+# Allow port range
+ufw allow 8000:8010/tcp
+
+# Allow specific service
+ufw allow mysql
+
+# Delete rule
+ufw delete allow 80/tcp
+```
+
+## Step 5: Install Software Essentials
+
+### Development Tools
+```bash
+# Build essentials
+apt install build-essential -y
+
+# Version control
+apt install git -y
+
+# Text editors
+apt install vim nano -y
+
+# Network tools
+apt install curl wget net-tools -y
+
+# System monitoring
+apt install htop iotop -y
+
+# Archive tools
+apt install zip unzip -y
+```
+
+### Web Server Stack (LEMP)
+
+#### 1. Install Nginx
+```bash
+# Install Nginx
+apt install nginx -y
+
+# Start dan enable
+systemctl start nginx
+systemctl enable nginx
+
+# Cek status
+systemctl status nginx
+
+# Test konfigurasi
+nginx -t
+```
+
+#### 2. Install MySQL/MariaDB
+```bash
+# Install MariaDB
+apt install mariadb-server -y
+
+# Secure installation
+mysql_secure_installation
+
+# Start dan enable
+systemctl start mariadb
+systemctl enable mariadb
+```
+
+#### 3. Install PHP
+```bash
+# Install PHP dan extensions
+apt install php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-zip -y
+
+# Cek versi PHP
+php --version
+
+# Start PHP-FPM
+systemctl start php8.2-fpm
+systemctl enable php8.2-fpm
+```
+
+## Step 6: Konfigurasi Web Server
+
+### Nginx Virtual Host
+```bash
+# Buat direktori website
+mkdir -p /var/www/example.com/html
+
+# Set ownership
+chown -R www-data:www-data /var/www/example.com
+
+# Buat file index
+echo "<h1>Welcome to Example.com</h1>" > /var/www/example.com/html/index.html
+```
+
+### Konfigurasi Nginx Site
+```bash
+# Buat konfigurasi site
+nano /etc/nginx/sites-available/example.com
+```
+
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+    
+    root /var/www/example.com/html;
+    index index.html index.htm index.php;
+    
+    server_name example.com www.example.com;
+    
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    
+    # PHP processing
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+    }
+    
+    # Deny access to .htaccess files
+    location ~ /\.ht {
+        deny all;
+    }
+}
+```
+
+### Enable Site
+```bash
+# Enable site
+ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+
+# Test konfigurasi
+nginx -t
+
+# Reload Nginx
+systemctl reload nginx
+```
+
+## Step 7: SSL Certificate dengan Let's Encrypt
+
+### Install Certbot
+```bash
+# Install snapd
+apt install snapd -y
+
+# Install certbot
+snap install --classic certbot
+
+# Create symlink
+ln -s /snap/bin/certbot /usr/bin/certbot
+```
+
+### Generate SSL Certificate
+```bash
+# Generate certificate
+certbot --nginx -d example.com -d www.example.com
+
+# Test auto-renewal
+certbot renew --dry-run
+```
+
+## Step 8: Database Management
+
+### MySQL/MariaDB Basic Commands
+```bash
+# Login ke MySQL
+mysql -u root -p
+
+# Buat database
+CREATE DATABASE myapp_db;
+
+# Buat user
+CREATE USER 'myapp_user'@'localhost' IDENTIFIED BY 'strong_password';
+
+# Grant privileges
+GRANT ALL PRIVILEGES ON myapp_db.* TO 'myapp_user'@'localhost';
+
+# Flush privileges
+FLUSH PRIVILEGES;
+
+# Exit
+EXIT;
+```
+
+### Backup Database
+```bash
+# Backup single database
+mysqldump -u root -p myapp_db > myapp_db_backup.sql
+
+# Backup all databases
+mysqldump -u root -p --all-databases > all_databases_backup.sql
+
+# Restore database
+mysql -u root -p myapp_db < myapp_db_backup.sql
+```
+
+## Step 9: Monitoring dan Maintenance
+
+### System Monitoring
+```bash
+# Cek penggunaan disk
+df -h
+
+# Cek penggunaan memory
+free -h
+
+# Cek proses yang berjalan
+ps aux
+
+# Monitor real-time
+htop
+
+# Cek log system
+journalctl -f
+
+# Cek log Nginx
+tail -f /var/log/nginx/access.log
+tail -f /var/log/nginx/error.log
+```
+
+### Automated Backups
+```bash
+# Buat script backup
+nano /home/username/backup.sh
+```
+
+```bash
+#!/bin/bash
+
+# Variables
+BACKUP_DIR="/home/username/backups"
+DATE=$(date +%Y%m%d_%H%M%S)
+
+# Create backup directory
+mkdir -p $BACKUP_DIR
+
+# Database backup
+mysqldump -u root -p'your_password' --all-databases > $BACKUP_DIR/db_backup_$DATE.sql
+
+# Website backup
+tar -czf $BACKUP_DIR/website_backup_$DATE.tar.gz /var/www/
+
+# Keep only last 7 days
+find $BACKUP_DIR -name "*.sql" -mtime +7 -delete
+find $BACKUP_DIR -name "*.tar.gz" -mtime +7 -delete
+
+echo "Backup completed: $DATE"
+```
+
+### Setup Cron Job
+```bash
+# Edit crontab
+crontab -e
+
+# Backup harian jam 2 pagi
+0 2 * * * /home/username/backup.sh >> /home/username/backup.log 2>&1
+
+# Update system mingguan
+0 3 * * 0 apt update && apt upgrade -y
+```
+
+## Step 10: Security Hardening
+
+### Install Fail2Ban
+```bash
+# Install fail2ban
+apt install fail2ban -y
+
+# Copy konfigurasi
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
+# Edit konfigurasi
+nano /etc/fail2ban/jail.local
+```
+
+### Konfigurasi Fail2Ban
+```ini
+[DEFAULT]
+bantime = 3600
+findtime = 600
+maxretry = 3
+
+[sshd]
+enabled = true
+port = 2222
+logpath = /var/log/auth.log
+
+[nginx-http-auth]
+enabled = true
+```
+
+### Start Fail2Ban
+```bash
+systemctl start fail2ban
+systemctl enable fail2ban
+systemctl status fail2ban
+```
+
+### Additional Security
+```bash
+# Disable unused services
+systemctl disable bluetooth
+systemctl disable cups
+
+# Set timezone
+timedatectl set-timezone Asia/Jakarta
+
+# Configure automatic updates
+apt install unattended-upgrades -y
+dpkg-reconfigure -plow unattended-upgrades
+```
+
+## Step 11: Performance Optimization
+
+### Nginx Optimization
+```bash
+# Edit nginx.conf
+nano /etc/nginx/nginx.conf
+```
+
+```nginx
+worker_processes auto;
+worker_connections 1024;
+
+# Gzip compression
+gzip on;
+gzip_vary on;
+gzip_min_length 1024;
+gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+
+# Client settings
+client_max_body_size 64M;
+client_body_timeout 12;
+client_header_timeout 12;
+keepalive_timeout 15;
+send_timeout 10;
+```
+
+### MySQL Optimization
+```bash
+# Edit MySQL config
+nano /etc/mysql/mariadb.conf.d/50-server.cnf
+```
+
+```ini
+[mysqld]
+innodb_buffer_pool_size = 256M
+innodb_log_file_size = 64M
+query_cache_size = 32M
+query_cache_limit = 2M
+max_connections = 100
+```
+
+## Step 12: Troubleshooting Common Issues
+
+### Service Management
+```bash
+# Restart services
+systemctl restart nginx
+systemctl restart mariadb
+systemctl restart php8.2-fpm
+
+# Check service status
+systemctl status service_name
+
+# View service logs
+journalctl -u service_name -f
+```
+
+### Permission Issues
+```bash
+# Fix web directory permissions
+chown -R www-data:www-data /var/www/
+chmod -R 755 /var/www/
+
+# Fix SSH permissions
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
+
+### Network Issues
+```bash
+# Check open ports
+netstat -tulpn
+
+# Test connectivity
+ping google.com
+curl -I http://your-domain.com
+
+# DNS lookup
+nslookup your-domain.com
+```
+
+## Checklist Konfigurasi Server
+
+### ✅ Security Checklist
+- [ ] Update system packages
+- [ ] Create non-root user
+- [ ] Configure SSH security
+- [ ] Setup SSH key authentication
+- [ ] Configure firewall (UFW)
+- [ ] Install and configure Fail2Ban
+- [ ] Disable unused services
+- [ ] Set strong passwords
+
+### ✅ Web Server Checklist
+- [ ] Install Nginx/Apache
+- [ ] Install PHP-FPM
+- [ ] Install MySQL/MariaDB
+- [ ] Configure virtual hosts
+- [ ] Setup SSL certificates
+- [ ] Test website functionality
+
+### ✅ Maintenance Checklist
+- [ ] Setup automated backups
+- [ ] Configure log rotation
+- [ ] Setup monitoring
+- [ ] Create maintenance scripts
+- [ ] Document configurations
+
+## Best Practices untuk SysAdmin
+
+### 1. **Always Backup**
+```bash
+# Backup sebelum perubahan besar
+cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup.$(date +%Y%m%d)
+```
+
+### 2. **Use Version Control**
+```bash
+# Track konfigurasi dengan git
+cd /etc
+git init
+git add nginx/ mysql/
+git commit -m "Initial server configuration"
+```
+
+### 3. **Monitor Resources**
+```bash
+# Setup monitoring script
+nano /home/username/monitor.sh
+```
+
+```bash
+#!/bin/bash
+echo "=== System Status $(date) ==="
+echo "CPU Usage:"
+top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1
+
+echo "Memory Usage:"
+free -h
+
+echo "Disk Usage:"
+df -h /
+
+echo "Active Connections:"
+netstat -an | grep :80 | wc -l
+```
+
+### 4. **Documentation**
+Selalu dokumentasikan:
+- Konfigurasi yang diubah
+- Password dan credentials
+- Prosedur backup dan restore
+- Contact information untuk emergency
+
+## Kesimpulan
+
+Konfigurasi Debian server yang proper memerlukan perhatian pada beberapa aspek penting:
+
+1. **Security First** - Selalu prioritaskan keamanan
+2. **Regular Updates** - Keep system up to date
+3. **Monitoring** - Monitor performance dan security
+4. **Backup Strategy** - Backup data secara regular
+5. **Documentation** - Dokumentasikan semua konfigurasi
+
+Dengan mengikuti panduan ini, Anda akan memiliki Debian server yang aman, stabil, dan siap untuk production. Ingat bahwa system administration adalah skill yang terus berkembang, jadi terus belajar dan praktik!
+
+### Resources Tambahan
+- [Debian Official Documentation](https://www.debian.org/doc/)
+- [Nginx Documentation](https://nginx.org/en/docs/)
+- [MySQL Documentation](https://dev.mysql.com/doc/)
+- [Let's Encrypt Documentation](https://letsencrypt.org/docs/)
+
+**Happy System Administration!** 🚀

@@ -5,7 +5,543 @@ lastmod: '2024-02-15'
 tags: ['node-js', 'javascript', 'backend','paradigm']
 draft: false
 summary: 'Mengenal Konsep Dasar Pemrograman Berbasis Objek di Javascript: Dari Syntax Dasar ES6 hingga Implementasinya'
-layout: PostSimple
-images: '/static/images/oop-thumb.png'
+images: ['/static/images/oop-thumb.png']
 ---
-## Coming Soon
+
+# Pemrograman Berbasis Objek di JavaScript
+
+JavaScript adalah bahasa yang sangat fleksibel dan mendukung berbagai paradigma pemrograman, termasuk **Object-Oriented Programming (OOP)**. Meskipun JavaScript awalnya tidak dirancang sebagai bahasa OOP murni, dengan perkembangan ES6 dan versi selanjutnya, JavaScript kini memiliki fitur-fitur OOP yang sangat powerful.
+
+## Apa itu Pemrograman Berbasis Objek?
+
+Pemrograman Berbasis Objek adalah paradigma pemrograman yang mengorganisir kode dalam bentuk **objek** yang memiliki:
+- **Properties** (atribut/data)
+- **Methods** (fungsi/behavior)
+
+Konsep utama dalam OOP meliputi:
+- **Encapsulation** (Enkapsulasi)
+- **Inheritance** (Pewarisan)
+- **Polymorphism** (Polimorfisme)
+- **Abstraction** (Abstraksi)
+
+## Class dan Object di JavaScript
+
+### Membuat Class
+
+Sejak ES6, JavaScript memiliki syntax `class` yang memudahkan pembuatan blueprint untuk objek:
+
+```javascript
+class Person {
+  // Constructor - dipanggil saat objek dibuat
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  
+  // Method
+  greet() {
+    return `Halo, nama saya ${this.name} dan umur saya ${this.age} tahun`;
+  }
+  
+  // Method untuk menambah umur
+  birthday() {
+    this.age++;
+    return `Selamat ulang tahun! Sekarang umur saya ${this.age} tahun`;
+  }
+}
+```
+
+### Membuat Object dari Class
+
+```javascript
+// Membuat instance dari class Person
+const person1 = new Person("Budi", 25);
+const person2 = new Person("Sari", 30);
+
+console.log(person1.greet()); // "Halo, nama saya Budi dan umur saya 25 tahun"
+console.log(person2.greet()); // "Halo, nama saya Sari dan umur saya 30 tahun"
+
+person1.birthday(); // "Selamat ulang tahun! Sekarang umur saya 26 tahun"
+```
+
+## Encapsulation (Enkapsulasi)
+
+Enkapsulasi adalah konsep menyembunyikan detail implementasi dan hanya mengekspos interface yang diperlukan.
+
+### Private Fields dan Methods
+
+```javascript
+class BankAccount {
+  // Private field (dimulai dengan #)
+  #balance = 0;
+  #accountNumber;
+  
+  constructor(accountNumber, initialBalance = 0) {
+    this.#accountNumber = accountNumber;
+    this.#balance = initialBalance;
+  }
+  
+  // Private method
+  #validateAmount(amount) {
+    return amount > 0 && typeof amount === 'number';
+  }
+  
+  // Public methods
+  deposit(amount) {
+    if (this.#validateAmount(amount)) {
+      this.#balance += amount;
+      return `Berhasil deposit ${amount}. Saldo: ${this.#balance}`;
+    }
+    return "Jumlah deposit tidak valid";
+  }
+  
+  withdraw(amount) {
+    if (this.#validateAmount(amount) && amount <= this.#balance) {
+      this.#balance -= amount;
+      return `Berhasil tarik ${amount}. Saldo: ${this.#balance}`;
+    }
+    return "Penarikan gagal";
+  }
+  
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const account = new BankAccount("123456", 1000);
+console.log(account.deposit(500)); // "Berhasil deposit 500. Saldo: 1500"
+console.log(account.withdraw(200)); // "Berhasil tarik 200. Saldo: 1300"
+console.log(account.getBalance()); // 1300
+
+// Ini akan error karena #balance adalah private
+// console.log(account.#balance); // SyntaxError
+```
+
+## Inheritance (Pewarisan)
+
+Inheritance memungkinkan class untuk mewarisi properties dan methods dari class lain.
+
+```javascript
+// Parent class
+class Animal {
+  constructor(name, species) {
+    this.name = name;
+    this.species = species;
+  }
+  
+  makeSound() {
+    return `${this.name} membuat suara`;
+  }
+  
+  info() {
+    return `${this.name} adalah seekor ${this.species}`;
+  }
+}
+
+// Child class yang mewarisi dari Animal
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name, "Anjing"); // Memanggil constructor parent
+    this.breed = breed;
+  }
+  
+  // Override method dari parent
+  makeSound() {
+    return `${this.name} menggonggong: Woof! Woof!`;
+  }
+  
+  // Method khusus untuk Dog
+  fetch() {
+    return `${this.name} mengambil bola`;
+  }
+}
+
+class Cat extends Animal {
+  constructor(name, color) {
+    super(name, "Kucing");
+    this.color = color;
+  }
+  
+  makeSound() {
+    return `${this.name} mengeong: Meow!`;
+  }
+  
+  climb() {
+    return `${this.name} memanjat pohon`;
+  }
+}
+
+// Penggunaan
+const dog = new Dog("Buddy", "Golden Retriever");
+const cat = new Cat("Whiskers", "Orange");
+
+console.log(dog.info()); // "Buddy adalah seekor Anjing"
+console.log(dog.makeSound()); // "Buddy menggonggong: Woof! Woof!"
+console.log(dog.fetch()); // "Buddy mengambil bola"
+
+console.log(cat.info()); // "Whiskers adalah seekor Kucing"
+console.log(cat.makeSound()); // "Whiskers mengeong: Meow!"
+console.log(cat.climb()); // "Whiskers memanjat pohon"
+```
+
+## Polymorphism (Polimorfisme)
+
+Polimorfisme memungkinkan objek dari class yang berbeda untuk diperlakukan dengan cara yang sama melalui interface yang sama.
+
+```javascript
+class Shape {
+  calculateArea() {
+    throw new Error("Method calculateArea harus diimplementasikan");
+  }
+  
+  getInfo() {
+    return `Area: ${this.calculateArea()}`;
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(width, height) {
+    super();
+    this.width = width;
+    this.height = height;
+  }
+  
+  calculateArea() {
+    return this.width * this.height;
+  }
+}
+
+class Circle extends Shape {
+  constructor(radius) {
+    super();
+    this.radius = radius;
+  }
+  
+  calculateArea() {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+class Triangle extends Shape {
+  constructor(base, height) {
+    super();
+    this.base = base;
+    this.height = height;
+  }
+  
+  calculateArea() {
+    return (this.base * this.height) / 2;
+  }
+}
+
+// Polymorphism in action
+const shapes = [
+  new Rectangle(5, 10),
+  new Circle(7),
+  new Triangle(8, 6)
+];
+
+shapes.forEach(shape => {
+  console.log(shape.getInfo());
+});
+// Output:
+// Area: 50
+// Area: 153.93804002589985
+// Area: 24
+```
+
+## Static Methods dan Properties
+
+Static members milik class itu sendiri, bukan instance dari class.
+
+```javascript
+class MathUtils {
+  static PI = 3.14159;
+  
+  static add(a, b) {
+    return a + b;
+  }
+  
+  static multiply(a, b) {
+    return a * b;
+  }
+  
+  static circleArea(radius) {
+    return this.PI * radius * radius;
+  }
+}
+
+// Menggunakan static methods tanpa membuat instance
+console.log(MathUtils.add(5, 3)); // 8
+console.log(MathUtils.multiply(4, 7)); // 28
+console.log(MathUtils.circleArea(5)); // 78.53975
+console.log(MathUtils.PI); // 3.14159
+```
+
+## Getters dan Setters
+
+Getters dan setters memungkinkan kita mengontrol akses ke properties.
+
+```javascript
+class Temperature {
+  constructor(celsius = 0) {
+    this._celsius = celsius;
+  }
+  
+  // Getter
+  get celsius() {
+    return this._celsius;
+  }
+  
+  get fahrenheit() {
+    return (this._celsius * 9/5) + 32;
+  }
+  
+  get kelvin() {
+    return this._celsius + 273.15;
+  }
+  
+  // Setter
+  set celsius(value) {
+    if (value < -273.15) {
+      throw new Error("Suhu tidak boleh di bawah absolute zero");
+    }
+    this._celsius = value;
+  }
+  
+  set fahrenheit(value) {
+    this.celsius = (value - 32) * 5/9;
+  }
+}
+
+const temp = new Temperature(25);
+console.log(temp.celsius); // 25
+console.log(temp.fahrenheit); // 77
+console.log(temp.kelvin); // 298.15
+
+temp.fahrenheit = 100;
+console.log(temp.celsius); // 37.77777777777778
+```
+
+## Contoh Praktis: Sistem Manajemen Karyawan
+
+Mari kita buat contoh yang lebih kompleks untuk menggabungkan semua konsep OOP:
+
+```javascript
+// Base class
+class Employee {
+  static #employeeCount = 0;
+  
+  constructor(name, id, department) {
+    this.name = name;
+    this.id = id;
+    this.department = department;
+    this.hireDate = new Date();
+    Employee.#employeeCount++;
+  }
+  
+  // Abstract method
+  calculateSalary() {
+    throw new Error("Method calculateSalary harus diimplementasikan");
+  }
+  
+  getInfo() {
+    return {
+      name: this.name,
+      id: this.id,
+      department: this.department,
+      hireDate: this.hireDate,
+      salary: this.calculateSalary()
+    };
+  }
+  
+  static getEmployeeCount() {
+    return Employee.#employeeCount;
+  }
+}
+
+// Full-time employee
+class FullTimeEmployee extends Employee {
+  constructor(name, id, department, monthlySalary) {
+    super(name, id, department);
+    this.monthlySalary = monthlySalary;
+  }
+  
+  calculateSalary() {
+    return this.monthlySalary;
+  }
+}
+
+// Part-time employee
+class PartTimeEmployee extends Employee {
+  constructor(name, id, department, hourlyRate, hoursWorked) {
+    super(name, id, department);
+    this.hourlyRate = hourlyRate;
+    this.hoursWorked = hoursWorked;
+  }
+  
+  calculateSalary() {
+    return this.hourlyRate * this.hoursWorked;
+  }
+}
+
+// Manager (extends FullTimeEmployee)
+class Manager extends FullTimeEmployee {
+  constructor(name, id, department, monthlySalary, bonus = 0) {
+    super(name, id, department, monthlySalary);
+    this.bonus = bonus;
+    this.subordinates = [];
+  }
+  
+  calculateSalary() {
+    return this.monthlySalary + this.bonus;
+  }
+  
+  addSubordinate(employee) {
+    this.subordinates.push(employee);
+  }
+  
+  getTeamInfo() {
+    return {
+      manager: this.name,
+      teamSize: this.subordinates.length,
+      teamMembers: this.subordinates.map(emp => emp.name)
+    };
+  }
+}
+
+// Company class untuk mengelola semua karyawan
+class Company {
+  constructor(name) {
+    this.name = name;
+    this.employees = [];
+  }
+  
+  addEmployee(employee) {
+    this.employees.push(employee);
+  }
+  
+  getTotalPayroll() {
+    return this.employees.reduce((total, emp) => total + emp.calculateSalary(), 0);
+  }
+  
+  getEmployeesByDepartment(department) {
+    return this.employees.filter(emp => emp.department === department);
+  }
+  
+  getCompanyReport() {
+    return {
+      companyName: this.name,
+      totalEmployees: this.employees.length,
+      totalPayroll: this.getTotalPayroll(),
+      departments: [...new Set(this.employees.map(emp => emp.department))]
+    };
+  }
+}
+
+// Penggunaan
+const company = new Company("Tech Solutions Inc.");
+
+const john = new FullTimeEmployee("John Doe", "EMP001", "Engineering", 8000000);
+const jane = new PartTimeEmployee("Jane Smith", "EMP002", "Design", 50000, 80);
+const bob = new Manager("Bob Johnson", "MGR001", "Engineering", 12000000, 2000000);
+
+bob.addSubordinate(john);
+
+company.addEmployee(john);
+company.addEmployee(jane);
+company.addEmployee(bob);
+
+console.log("=== Company Report ===");
+console.log(company.getCompanyReport());
+
+console.log("\n=== Employee Details ===");
+company.employees.forEach(emp => {
+  console.log(emp.getInfo());
+});
+
+console.log("\n=== Team Info ===");
+console.log(bob.getTeamInfo());
+
+console.log(`\nTotal Employees Created: ${Employee.getEmployeeCount()}`);
+```
+
+## Best Practices untuk OOP di JavaScript
+
+### 1. Gunakan Meaningful Names
+```javascript
+// ❌ Bad
+class P {
+  constructor(n, a) {
+    this.n = n;
+    this.a = a;
+  }
+}
+
+// ✅ Good
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+```
+
+### 2. Encapsulation yang Proper
+```javascript
+// ✅ Good - menggunakan private fields
+class User {
+  #password;
+  
+  constructor(username, password) {
+    this.username = username;
+    this.#password = this.#hashPassword(password);
+  }
+  
+  #hashPassword(password) {
+    // Hash password logic
+    return password + "_hashed";
+  }
+  
+  verifyPassword(inputPassword) {
+    return this.#hashPassword(inputPassword) === this.#password;
+  }
+}
+```
+
+### 3. Composition over Inheritance
+```javascript
+// Composition approach
+class Engine {
+  start() {
+    return "Engine started";
+  }
+}
+
+class Car {
+  constructor() {
+    this.engine = new Engine(); // Composition
+  }
+  
+  start() {
+    return this.engine.start();
+  }
+}
+```
+
+## Kesimpulan
+
+Pemrograman Berbasis Objek di JavaScript memberikan struktur yang lebih baik untuk aplikasi yang kompleks. Dengan memahami konsep-konsep seperti:
+
+- **Classes dan Objects** untuk blueprint dan instance
+- **Encapsulation** untuk data hiding dan security
+- **Inheritance** untuk code reuse
+- **Polymorphism** untuk flexibility
+- **Static members** untuk utility functions
+- **Getters/Setters** untuk controlled access
+
+Kita dapat menulis kode yang lebih maintainable, scalable, dan mudah dipahami.
+
+JavaScript modern dengan ES6+ telah membuat OOP menjadi lebih intuitif dan powerful. Meskipun JavaScript tetap fleksibel dalam paradigma pemrograman, OOP memberikan struktur yang sangat berguna untuk proyek-proyek besar.
+
+**Tips**: Mulailah dengan konsep sederhana dan secara bertahap terapkan prinsip-prinsip OOP yang lebih advanced sesuai kebutuhan proyek Anda.

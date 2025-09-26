@@ -179,7 +179,7 @@ export default function Home({ posts }) {
                       <Image
                         width={800}
                         height={600}
-                        src={images}
+                        src={images?.[0] || '/static/images/default-blog.jpg'}
                         alt={title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
@@ -254,7 +254,7 @@ export default function Home({ posts }) {
                     <Image
                       width={600}
                       height={400}
-                      src={images}
+                      src={images?.[0] || '/static/images/default-blog.jpg'}
                       alt={title}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
