@@ -30,7 +30,7 @@ importers:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
       contentlayer:
-        specifier: ^0.3.4
+        specifier: 0.3.4
         version: 0.3.4(esbuild@0.18.11)
       esbuild:
         specifier: 0.18.11
@@ -48,7 +48,7 @@ importers:
         specifier: ^13.5.11
         version: 13.5.11(@babel/core@7.28.4)(@opentelemetry/api@1.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-contentlayer:
-        specifier: ^0.3.4
+        specifier: 0.3.4
         version: 0.3.4(contentlayer@0.3.4(esbuild@0.18.11))(esbuild@0.18.11)(next@13.5.11(@babel/core@7.28.4)(@opentelemetry/api@1.4.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-themes:
         specifier: ^0.2.1
